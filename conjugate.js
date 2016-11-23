@@ -193,7 +193,7 @@ function nextQuestion() {
 
     console.log(correct);
     $('#question-word').html(term.render());
-    $('#meaning').text(term.def);
+    $('#meaning').html(term.def);
     $('#mods .mod').remove();
     $('#answer').val('');
     fadeInMods(question.modList);
