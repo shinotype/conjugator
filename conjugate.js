@@ -105,10 +105,16 @@ function Question(word) {
 }
 
 Question.prototype.modify = function(modSet) {
+    if (!modSet.length) return;
     // Pick and apply a random mod
     var modifier = fetchRandom(modSet);
     this.word = modifier.modFunc(this.word);
     this.modList.push.apply(this.modList, modifier.desc);
+
+    // If theres a next mod, apply it too
+    if (modifier.nextMod) {
+        this.modify(modifier.nextMod.filter(filterMod));
+    }
 }
 
 // Fetches a random element of an array
@@ -170,6 +176,7 @@ function setTimeBar(percent) {
 
 // Generate a new question
 function nextQuestion() {
+    console.clear();
     time = 100 * timeMax;
 
     var wordset = pickType(),
@@ -367,6 +374,9 @@ function checkConfig(opts)
   var i, id;
   for(i=0; i < opts.length; i++)
   {
+    if(opts[i] == 'base')
+      continue;
+
     id = '#opt-' + opts[i];
     if($(id).filter(":checked").length == 0)
     {

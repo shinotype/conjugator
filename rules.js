@@ -8,7 +8,7 @@ function Modifier(flags, modFunc, nextMod) {
     this.modFunc = modFunc;
     this.nextMod = nextMod;
   } catch(e){
-    console.error(flags, modFunc)
+    console.error(flags, modFunc);
   };
 }
 
@@ -33,7 +33,7 @@ Term.prototype.render = function()
 }
 
 var KANA_FAM = {
-  V: ['あ','え','い','お','う'],
+  V: ['わ','え','い','お','う'],
 
   K: ['か','け','き','こ','く'],
   G: ['が','げ','ぎ','ご','ぐ'],
@@ -90,6 +90,7 @@ var Mogrify = {
 };
 
 var ModTypes = {
+  BASE: ['', 'base'],
   FORMAL: ['Formal', 'formal'],
   INFORMAL: ['Informal', 'informal'],
   PAST: ['Past', 'past'],
@@ -109,6 +110,35 @@ var ModTypes = {
   SEEMSLIKE: ['Seems like', 'seemslike'],
 };
 
+var NAIFORM = [
+    new Modifier([ModTypes.INFORMAL], function(w) {
+        return w;
+    }),
+    new Modifier([ModTypes.PLEASE], function(w) {
+        return w + 'いでください';
+    }),
+    new Modifier([ModTypes.TE], function(w) {
+        return w + 'くて';
+    }),
+    new Modifier([ModTypes.CONDITIONAL], function(w) {
+        return w + 'ければ';
+    }),
+    new Modifier([ModTypes.SEEMSLIKE], function(w) {
+        return w + 'さそう';
+    }),
+    new Modifier([ModTypes.HEARSAY], function(w) {
+        return w + 'いそう';
+    }),
+]
+
+var TEFORM = [
+    new Modifier([ModTypes.BASE], function(w) {
+        return w;
+    }),
+    new Modifier([ModTypes.PLEASE], function(w) {
+        return w + 'ください';
+    }),
+]
 
 
 var ICHIVERB = [
@@ -117,9 +147,6 @@ var ICHIVERB = [
     }),
     Modifier([ModTypes.INFORMAL, ModTypes.PAST], function(w) {
         return trimLast(w) + 'た';
-    }),
-    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE], function(w) {
-        return trimLast(w) + 'ない';
     }),
     Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.PAST], function(w) {
         return trimLast(w) + 'なかった';
@@ -142,15 +169,15 @@ var ICHIVERB = [
 ]
 
 var ICHIDAN = [
-    Modifier([], function(w) {
+    Modifier([ModTypes.BASE], function(w) {
         return w;
     }, ICHIVERB),
     Modifier([ModTypes.TE], function(w) {
         return trimLast(w) + 'て';
-    }),
-    Modifier([ModTypes.TE, ModTypes.PLEASE], function(w) {
-        return trimLast(w) + 'て' + 'ください';
-    }),
+    }, TEFORM),
+    Modifier([ModTypes.NEGATIVE], function(w) {
+        return w　+ 'ない';
+    }, NAIFORM),
     Modifier([ModTypes.POTENTIAL], function(w) {
         return trimLast(w) + 'られる';
     }, ICHIVERB),
