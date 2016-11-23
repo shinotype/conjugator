@@ -16,7 +16,9 @@ function Term(word, kanji, def) {
     if(this instanceof Term == false)
       return new Term(word, kanji, def);
     this.word = word;
-    this.kanji = kanji;
+    this.kanji = '';
+    if ($("#opt-kanji:checked").length == 0)
+      this.kanji = kanji;
     this.ruby = addFurigana(kanji || word, word);
     this.def = def;
 };

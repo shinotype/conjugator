@@ -100,9 +100,12 @@ $(document).ready(function() {
 
 });
 
-function Question(word) {
-    this.word = word;
-    this.base = word;
+function Question(term) {
+    this.word = term.word;
+    this.kanji = '';
+    if ($("#opt-kanji:checked").length == 1)
+      this.kanji = term.kanji;
+    this.base = term.kanji || term.word;
     this.modList = [];
 }
 
@@ -111,6 +114,8 @@ Question.prototype.modify = function(modSet) {
     // Pick and apply a random mod
     var modifier = fetchRandom(modSet);
     this.word = modifier.modFunc(this.word);
+    if(this.kanji)
+      this.kanji = modifier.modFunc(this.kanji);
     this.modList.push.apply(this.modList, modifier.desc);
 
     // If theres a next mod, apply it too
@@ -136,8 +141,8 @@ function skipQuestion() {
         $('#mult').text(mult);
         $('#answer').addClass('flash-red');
         $('#time-bar').css('background', '#e74c3c');
-        addWell($('#answer').val()||'', correct, quiz_term)
-        $('#answer').val(correct);
+        addWell($('#answer').val()||'', correct, quiz_term, false)
+        $('#answer').val(correct[0]);
         setTimeout(function(){
             $('#answer').removeClass('flash-red');
         }, 300);
@@ -148,7 +153,7 @@ function skipQuestion() {
 function submitAnswer() {
     if(skipped || scored) return;
     var ans = $('#answer').val().replace(/\s/g, '');
-    if (ans == correct && !skipped) {
+    if (correct.indexOf(ans) > -1 && !skipped) {
         $('#answer').addClass('flash');
         setTimeout(function(){
             $('#answer').removeClass('flash');
@@ -163,7 +168,7 @@ function submitAnswer() {
             timeMax = _timeMax;
         }
 
-        addWell(ans, correct, quiz_term)
+        addWell(ans, correct, quiz_term, true)
         $('#score').text(score);
         $('#mult').text(mult);
         scored = true;
@@ -195,9 +200,9 @@ function nextQuestion() {
     var term = terms[Math.floor(Math.random() * terms.length)];
     $('#part').text(pos)
 
-    var question = new Question(term.word);
+    var question = new Question(term);
     question.modify(type);
-    correct = question.word;
+    correct = ([question.kanji, question.word]).filter(function(t){return !!t;});
     quiz_term = term.word;
 
     console.log(correct);
@@ -318,7 +323,7 @@ function genFullOption(target, label, opt) {
 
 var t = setInterval(interval, 10);
 
-function addWell(actual, expected, rootword)
+function addWell(actual, expected, rootword, isCorrect)
 {
   var mods = $("#mods .mod").map(function(){ return $(this).text()}).toArray().join(", ");
   var def = $("#meaning").text();
@@ -334,14 +339,14 @@ function addWell(actual, expected, rootword)
   );
 
   var expected_link = $("<a/>")
-  .text(expected)
+  .text(expected.join(', '))
   .attr({
     href: "http://jisho.org/search/" + encodeURIComponent(rootword),
     target: "jisho",
     title: "Jisho - " + rootword + " - click Show Inflections to review conjugations."
   });
 
-  if(actual.localeCompare(expected) == 0)
+  if(isCorrect)
   {
     w.addClass('correct').append(expected_link);
   }
