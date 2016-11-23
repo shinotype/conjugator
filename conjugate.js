@@ -8,6 +8,7 @@ var timeMax = _timeMax;
 var correct = '';
 var quiz_term = '';
 var skipped = false;
+var scored = false;
 
 $(document).ready(function() {
     // Stop the user from pressing enter in the text area
@@ -125,9 +126,11 @@ function fetchRandom(arr) {
 
 // Skips a question and shows the correct answer
 function skipQuestion() {
-    if (skipped) {
+    if (skipped || scored) {
         nextQuestion();
     } else {
+        skipped = true;
+        scored = false;
         time = -1;
         mult = 1;
         $('#mult').text(mult);
@@ -139,17 +142,18 @@ function skipQuestion() {
             $('#answer').removeClass('flash-red');
         }, 300);
     }
-    skipped = !skipped;
 }
 
 // Check if the answer is correct every time a character is typed
 function submitAnswer() {
+    if(skipped || scored) return;
     var ans = $('#answer').val().replace(/\s/g, '');
     if (ans == correct && !skipped) {
         $('#answer').addClass('flash');
         setTimeout(function(){
             $('#answer').removeClass('flash');
         }, 300);
+
         if (time > 0) {
             score += Math.ceil(time * mult / timeMax);
             mult += 1;
@@ -158,11 +162,11 @@ function submitAnswer() {
             mult = 1;
             timeMax = _timeMax;
         }
+
         addWell(ans, correct, quiz_term)
         $('#score').text(score);
-        setTimeBar(100);
         $('#mult').text(mult);
-        nextQuestion();
+        scored = true;
     }
 }
 
@@ -178,6 +182,9 @@ function setTimeBar(percent) {
 // Generate a new question
 function nextQuestion() {
     console.clear();
+    scored = false;
+    skipped = false;
+    setTimeBar(100);
     time = 100 * timeMax;
 
     var wordset = pickType(),
@@ -279,10 +286,11 @@ function snipLast(word) {
 
 // Timer function called 100 times per second
 function interval() {
-    if (!skipped) {
-        time--;
-        setTimeBar(time/timeMax);
-    }
+    if (skipped || scored)
+      return
+
+    time--;
+    setTimeBar(time/timeMax);
 }
 
 // Adds an label to the options menu
