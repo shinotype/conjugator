@@ -266,6 +266,11 @@ input[type=checkbox] {
   border-radius: 5px;
 }
 
+.wellitem a {
+    text-decoration: none;
+    color: #004;
+}
+
 .well-right {
   float: right;
 }

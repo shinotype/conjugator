@@ -6,6 +6,7 @@ var mult = 1;
 var _timeMax = 30;
 var timeMax = _timeMax;
 var correct = '';
+var quiz_term = '';
 var skipped = false;
 
 $(document).ready(function() {
@@ -132,7 +133,7 @@ function skipQuestion() {
         $('#mult').text(mult);
         $('#answer').addClass('flash-red');
         $('#time-bar').css('background', '#e74c3c');
-        addWell($('#answer').val()||'', correct)
+        addWell($('#answer').val()||'', correct, quiz_term)
         $('#answer').val(correct);
         setTimeout(function(){
             $('#answer').removeClass('flash-red');
@@ -157,7 +158,7 @@ function submitAnswer() {
             mult = 1;
             timeMax = _timeMax;
         }
-        addWell(ans, correct)
+        addWell(ans, correct, quiz_term)
         $('#score').text(score);
         setTimeBar(100);
         $('#mult').text(mult);
@@ -190,6 +191,7 @@ function nextQuestion() {
     var question = new Question(term.word);
     question.modify(type);
     correct = question.word;
+    quiz_term = term.word;
 
     console.log(correct);
     $('#question-word').html(term.render());
@@ -308,7 +310,7 @@ function genFullOption(target, label, opt) {
 
 var t = setInterval(interval, 10);
 
-function addWell(actual, expected)
+function addWell(actual, expected, rootword)
 {
   var mods = $("#mods .mod").map(function(){ return $(this).text()}).toArray().join(", ");
   var def = $("#meaning").text();
@@ -323,17 +325,22 @@ function addWell(actual, expected)
     .append(mods)
   );
 
+  var expected_link = $("<a/>")
+  .text(expected)
+  .attr({
+    href: "http://jisho.org/search/" + encodeURIComponent(rootword),
+    target: "jisho",
+    title: "Jisho - " + rootword + " - click Show Inflections to review conjugations."
+  });
+
   if(actual.localeCompare(expected) == 0)
   {
-    w.addClass('correct').append(
-      $("<span/>")
-      .text(actual)
-    );
+    w.addClass('correct').append(expected_link);
   }
   else
   {
     w.addClass('skipped')
-    .append(' ' + expected)
+    .append(expected_link)
     .append(
       $('<span/>')
       .addClass('striken')
