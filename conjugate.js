@@ -94,7 +94,7 @@ $(document).ready(function() {
     })
     .each(function(i)
     {
-      $(this).data("cfg", 2**i);
+      $(this).data("cfg", Math.pow(2, i));
     });
     setConfig(location.hash.replace(/^\#/, ''));
 
