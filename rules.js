@@ -240,7 +240,7 @@ var GODAN = [
         case 'る':
         case 'つ':
         case 'う':
-          e = 'ぅて';
+          e = 'って';
           break;
         default:
           console.error('No te conj for: ' + l)
@@ -269,7 +269,7 @@ var GODAN = [
         case 'る':
         case 'つ':
         case 'う':
-          e = 'ぅた';
+          e = 'った';
           break;
         default:
           console.error('No past conj for: ' + l)
@@ -347,7 +347,7 @@ var irreg_do = [
       polpast: "きました",
 
       neg: "こない",
-      polneg: "",
+      polneg: "きません",
 
       pastneg: "こなかった",
       polpastneg: "きませんでした",
