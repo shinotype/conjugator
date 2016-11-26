@@ -267,7 +267,7 @@ function nextQuestion() {
 
     var question = new Question(term);
     question.modify(type);
-    correct = $.unique(([question.kanji, question.word]).filter(filterFalse));
+    correct = ([question.kanji, question.word]).filter(filterFalse);
     quiz_term = term.word;
 
     console.log(correct);
@@ -415,8 +415,9 @@ function addWell(actual, expected, rootword, isCorrect)
     .append(mods)
   );
 
+  console.log(expected, $.unique(expected));
   var expected_link = $("<a/>")
-  .html(expected.join('<br />'))
+  .html($.unique(expected).join('<br />'))
   .addClass("answers")
   .attr({
     href: "http://jisho.org/search/" + encodeURIComponent(rootword),
