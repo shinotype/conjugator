@@ -271,8 +271,22 @@ input[type=checkbox] {
     color: #004;
 }
 
+.well-left {
+    display:block;
+    width: 30%;
+}
+
+.wellitem .mods {
+  display:block;
+  width: 60%;
+}
+
 .well-right {
   float: right;
+}
+
+.well-left {
+  float: left;
 }
 
 .correct {
@@ -287,11 +301,9 @@ input[type=checkbox] {
   text-decoration: line-through;
 }
 
-.wellitem .striken {
-    margin-left: 32px;
-    font-size: 12pt;
+.debug-out{
+  background-color: yellow;
 }
-/**/
 
 .option-label {
     float: left;
@@ -355,6 +367,7 @@ input[type=checkbox] {
     background: #3498db;
 }
 
+.clear,
 .menu-sec {
     clear: both
 }

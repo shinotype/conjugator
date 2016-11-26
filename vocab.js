@@ -5,7 +5,7 @@ var irregular_exist = [
 ]
 
 var irregular_do = [
-  new Term('する', '', 'to do'),
+  new Term('する', '為る', 'to do'),
   new Term('くる', '来る', 'to come'),
 ]
 
@@ -539,4 +539,3 @@ var na_adjective = [
   new Term('らく', '楽', 'comfortable, easy'),
   new Term('りっぱ', '立派', 'excellent, splendid, fine'),
 ]
-

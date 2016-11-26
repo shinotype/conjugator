@@ -7,6 +7,7 @@ var _timeMax = 30;
 var timeMax = _timeMax;
 var correct = '';
 var quiz_term = '';
+var termType = '';
 var skipped = false;
 var scored = false;
 
@@ -41,6 +42,68 @@ $(document).ready(function() {
         $('#ribbon img').animate({'height': '50px', 'width': '50px'}, 800);
     });
 
+    function debugTerm(e)
+    {
+      var wi = $(e.target).parents('.wellitem:first');
+      if(wi.data('done'))
+      {
+        wi.data('done', false).find('.debug-out').remove();
+        return;
+      }
+
+      var d = wi.data();
+      var term = d.term;
+      var typeMods = d.type;
+
+      var w = $('<div/>')
+      .addClass('debug-out');
+
+      w.append("<hr />");
+      typeMods.forEach(function(mod)
+      {
+        debugMod(term, mod, w);
+      });
+
+      wi.append(w).data('done', true);
+    };
+
+    function debugMod(term, mod, w, premods)
+    {
+      var q = Question({"word": term});
+      if(premods)
+      {
+        premods.forEach(function(m)
+        {
+            q.modify([m], true);
+        });
+      }
+      else
+      {
+        premods = [];
+      }
+
+      var newmods = premods.filter(listCopy);
+      newmods.push(mod);
+      q.modify([mod], true);
+
+      var desc = $.unique($.merge([], q.modList).filter(filterFalse));
+      if(desc.length)
+      {
+        w.append(q.word + " - " + desc.join(', '))
+        .append("<br />");
+      }
+
+      if(mod.nextMod)
+      {
+        mod.nextMod.forEach(function(nm)
+        {
+          debugMod(term, nm, w, newmods);
+        });
+      }
+    };
+
+    $('#well').on('click', '.debug', debugTerm);
+
     var genOpts = function(id, opts)
     {
       opts.forEach(function(opt)
@@ -70,9 +133,7 @@ $(document).ready(function() {
       ModTypes.IMPERITIVE,
       ModTypes.PROBABLE,
       ModTypes.CONDITIONAL,
-      ModTypes.PLEASE,
       ModTypes.REQUEST,
-      ModTypes.HEARSAY,
       ModTypes.SEEMSLIKE,
     ]);
 
@@ -101,6 +162,9 @@ $(document).ready(function() {
 });
 
 function Question(term) {
+    if(!(this instanceof Question))
+      return new Question(term);
+
     this.word = term.word;
     this.kanji = '';
     if ($("#opt-kanji:checked").length == 1)
@@ -109,7 +173,7 @@ function Question(term) {
     this.modList = [];
 }
 
-Question.prototype.modify = function(modSet) {
+Question.prototype.modify = function(modSet, skipNext) {
     if (!modSet.length) return;
     // Pick and apply a random mod
     var modifier = fetchRandom(modSet);
@@ -119,7 +183,7 @@ Question.prototype.modify = function(modSet) {
     this.modList.push.apply(this.modList, modifier.desc);
 
     // If theres a next mod, apply it too
-    if (modifier.nextMod) {
+    if (modifier.nextMod && !skipNext) {
         this.modify(modifier.nextMod.filter(filterMod));
     }
 }
@@ -198,11 +262,12 @@ function nextQuestion() {
       pos = wordset[2];
 
     var term = terms[Math.floor(Math.random() * terms.length)];
+    termType = type;
     $('#part').text(pos)
 
     var question = new Question(term);
     question.modify(type);
-    correct = ([question.kanji, question.word]).filter(function(t){return !!t;});
+    correct = $.unique(([question.kanji, question.word]).filter(filterFalse));
     quiz_term = term.word;
 
     console.log(correct);
@@ -210,6 +275,7 @@ function nextQuestion() {
     $('#meaning').html(term.def);
     $('#mods .mod').remove();
     $('#answer').val('');
+    $('#well').data('mods', question.modList.map(listCopy));
     fadeInMods(question.modList);
 }
 
@@ -325,41 +391,74 @@ var t = setInterval(interval, 10);
 
 function addWell(actual, expected, rootword, isCorrect)
 {
-  var mods = $("#mods .mod").map(function(){ return $(this).text()}).toArray().join(", ");
+  var mods = $('#well')
+  .data('mods')
+  .filter(filterFalse)
+  .join(", ");
+
   var def = $("#meaning").text();
   if(!def)
     return;
 
-  var w = $('<div/>').addClass('wellitem');
+  var w = $('<div/>')
+  .addClass('wellitem')
+  .data({
+      type: termType,
+      term: rootword
+  });
+
   w.append(
     $("<span/>")
     .addClass("well-right")
+    .addClass("mods")
     .append(def + " &mdash; ")
     .append(mods)
   );
 
   var expected_link = $("<a/>")
-  .text(expected.join(', '))
+  .html(expected.join('<br />'))
+  .addClass("answers")
   .attr({
     href: "http://jisho.org/search/" + encodeURIComponent(rootword),
     target: "jisho",
     title: "Jisho - " + rootword + " - click Show Inflections to review conjugations."
   });
 
+  var wellLeft = $("<div />")
+  .addClass("well-left")
+  .append(expected_link);
+
   if(isCorrect)
   {
-    w.addClass('correct').append(expected_link);
+    w.addClass('correct')
+    .append(wellLeft);
   }
   else
   {
+    if(actual.replace(/\s/g,'')) {
+      wellLeft.prepend(
+        $('<span/>')
+        .addClass("response")
+        .addClass('striken')
+        .html(actual + "<br />")
+      );
+    }
+
     w.addClass('skipped')
-    .append(expected_link)
-    .append(
-      $('<span/>')
-      .addClass('striken')
-      .text(actual)
-    );
+    .append(wellLeft);
   }
+
+  //*
+  w.append(
+    $("<span/>")
+    .addClass('debug')
+    .text('debug')
+  );
+  //*/
+
+  w.append(
+    $('<div/>').addClass('clear')
+  );
 
   $('#well').prepend(w);
 }
@@ -425,3 +524,15 @@ function filterMod(mod)
 
   return true;
 };
+
+// l.filter(filterFalse)
+function filterFalse(it)
+{
+  return !!it;
+};
+
+// l.map(listCopy)
+function listCopy(i)
+{
+  return i;
+}

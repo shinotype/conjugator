@@ -97,7 +97,7 @@ var ModTypes = {
   INFORMAL: ['Informal', 'informal'],
   PAST: ['Past', 'past'],
   NEGATIVE: ['Negative' ,'negative'],
-  TE: ['て　form', 'verbte'],
+  TE: ['て-form', 'verbte'],
   VOLITIONAL: ['Volitional', 'volitional'],
   POTENTIAL: ['Potential', 'potential'],
   CAUSATIVE: ['Causative', 'causative'],
@@ -106,18 +106,13 @@ var ModTypes = {
   IMPERITIVE: ['Imperitive', 'imperitive'],
   PROBABLE: ['Probable', 'probable'],
   CONDITIONAL: ['Conditional', 'conditional'],
-  PLEASE: ['Please', 'please'],
   REQUEST: ['Request', 'request'],
-  HEARSAY: ['Hearsay', 'hearsay'],
   SEEMSLIKE: ['Seems like', 'seemslike'],
 };
 
 var NAIFORM = [
     new Modifier([ModTypes.INFORMAL], function(w) {
         return w;
-    }),
-    new Modifier([ModTypes.PLEASE], function(w) {
-        return w + 'いでください';
     }),
     new Modifier([ModTypes.TE], function(w) {
         return w + 'くて';
@@ -128,20 +123,7 @@ var NAIFORM = [
     new Modifier([ModTypes.SEEMSLIKE], function(w) {
         return w + 'さそう';
     }),
-    new Modifier([ModTypes.HEARSAY], function(w) {
-        return w + 'いそう';
-    }),
 ]
-
-var TEFORM = [
-    new Modifier([ModTypes.BASE], function(w) {
-        return w;
-    }),
-    new Modifier([ModTypes.PLEASE], function(w) {
-        return w + 'ください';
-    }),
-]
-
 
 var ICHIVERB = [
     Modifier([ModTypes.INFORMAL], function(w) {
@@ -176,7 +158,7 @@ var ICHIDAN = [
     }, ICHIVERB),
     Modifier([ModTypes.TE], function(w) {
         return trimLast(w) + 'て';
-    }, TEFORM),
+    }),
     Modifier([ModTypes.NEGATIVE], function(w) {
         return w　+ 'ない';
     }, NAIFORM),
@@ -197,9 +179,6 @@ var ICHIDAN = [
     }, ICHIVERB),
     Modifier([ModTypes.REQUEST], function(w) {
         return trimLast(w) + 'なさい';
-    }),
-    Modifier([ModTypes.HEARSAY], function(w) {
-        return w + 'そう';
     }),
     Modifier([ModTypes.SEEMSLIKE], function(w) {
         return trimLast(w) + 'そう';
@@ -319,6 +298,7 @@ var GODAN = [
 var irreg_do = [
     {
       base: "する",
+      kanji: "為る",
       polite: "します",
       te: "して",
 
@@ -340,6 +320,7 @@ var irreg_do = [
     },
     {
       base: "くる",
+      kanji: "来る",
       polite: "きます",
       te: "きて",
 
@@ -363,7 +344,7 @@ var irreg_do = [
 
 var irreg_exist = [
     {
-      base: "です",
+      base: "だ",
       polite: "です",
 
       past: "だった",
@@ -428,6 +409,8 @@ function irreg_get(terms, w)
   {
     t = terms[i];
     if(t.base.localeCompare(w) == 0)
+      return t;
+    if('kanji' in t && t.kanji.localeCompare(w) == 0)
       return t;
   }
   console.error('No irregular term for: ' + w);
