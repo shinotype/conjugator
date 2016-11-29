@@ -267,7 +267,7 @@ function nextQuestion() {
 
     var question = new Question(term);
     question.modify(type);
-    correct = ([question.kanji, question.word]).filter(filterFalse);
+    correct = ([question.word, question.kanji]).filter(filterFalse);
     quiz_term = term.word;
 
     console.log(correct.join(", "));
