@@ -121,7 +121,7 @@ var NAIFORM = [
         return w + 'ければ';
     }),
     new Modifier([ModTypes.SEEMSLIKE], function(w) {
-        return w + 'さそう';
+        return trimLast(w) + 'さそう';
     }),
 ]
 
