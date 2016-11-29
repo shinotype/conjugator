@@ -180,16 +180,13 @@ var ICHIDAN = [
     Modifier([ModTypes.REQUEST], function(w) {
         return trimLast(w) + 'なさい';
     }),
-    Modifier([ModTypes.SEEMSLIKE], function(w) {
+    Modifier([ModTypes.INFORMAL, ModTypes.SEEMSLIKE], function(w) {
         return trimLast(w) + 'そう';
     }),
     Modifier([ModTypes.NEGATIVE, ModTypes.VOLITIONAL], function(w) {
         return w + 'まい';
     }),
     Modifier([ModTypes.VOLITIONAL], function(w) {
-        return trimLast(w) + 'ましょう';
-    }),
-    Modifier([ModTypes.FORMAL, ModTypes.VOLITIONAL], function(w) {
         return trimLast(w) + 'ましょう';
     }),
     Modifier([ModTypes.CONDITIONAL], function(w) {
@@ -227,7 +224,7 @@ var GODAN = [
       return trimLast(w) + e;
   }),
 
-  Modifier([ModTypes.PAST], function(w) {
+  Modifier([ModTypes.INFORMAL, ModTypes.PAST], function(w) {
       var e, l = snipLast(w);
       switch(l)
       {
@@ -255,7 +252,7 @@ var GODAN = [
       }
       return trimLast(w) + e;
   }),
-  Modifier([ModTypes.NEGATIVE], function(w) {
+  Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE], function(w) {
       var l = snipLast(w);
       return trimLast(w) + Mogrify.A(l) + 'ない';
   }),
@@ -278,10 +275,10 @@ var GODAN = [
   Modifier([ModTypes.VOLITIONAL], function(w) {
       return trimLast(w) + Mogrify.O(snipLast(w)) + 'う';
   }),
-  Modifier(ModTypes.FORMAL, function(w) {
+  Modifier([ModTypes.FORMAL], function(w) {
       return trimLast(w) + Mogrify.I(snipLast(w)) + 'ます';
   }),
-  Modifier([ModTypes.NEGATIVE, ModTypes.PAST], function(w) {
+  Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.PAST], function(w) {
       return trimLast(w) + Mogrify.A(snipLast(w)) + 'なかった';
   }),
   Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PAST], function(w) {
@@ -290,8 +287,14 @@ var GODAN = [
   Modifier([ModTypes.CAUSATIVE, ModTypes.PASSIVE], function(w) {
       return trimLast(w) + Mogrify.A(snipLast(w)) + 'せられる';
   }),
-  Modifier(ModTypes.IMPERITIVE, function(w) {
+  Modifier([ModTypes.IMPERITIVE], function(w) {
       return trimLast(w) + Mogrify.E(snipLast(w));
+  }),
+  Modifier([ModTypes.SEEMSLIKE], function(w) {
+      return trimLast(w) + Mogrify.I(snipLast(w)) + 'そう';
+  }),
+  Modifier([ModTypes.SEEMSLIKE, ModTypes.NEGATIVE], function(w) {
+      return trimLast(w) + Mogrify.A(snipLast(w)) + 'なさそう';
   }),
 ]
 
@@ -501,6 +504,9 @@ var II_ADJECTIVE = [
   Modifier(ModTypes.TE, function(w){
     return trimLast(w) + 'くて';
   }),
+  Modifier([ModTypes.SEEMSLIKE], function(w){
+    return trimLast(w) + 'そう';
+  }),
 ]
 
 var NA_ADJECTIVE = [
@@ -530,5 +536,8 @@ var NA_ADJECTIVE = [
   }),
   Modifier([ModTypes.TE], function(w){
     return w + 'で';
+  }),
+  Modifier([ModTypes.SEEMSLIKE], function(w){
+    return w + 'そう';
   }),
 ]
