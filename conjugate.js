@@ -270,7 +270,7 @@ function nextQuestion() {
     correct = ([question.kanji, question.word]).filter(filterFalse);
     quiz_term = term.word;
 
-    console.log(correct);
+    console.log(correct.join(", "));
     $('#question-word').html(term.render());
     $('#meaning').html(term.def);
     $('#mods .mod').remove();
@@ -415,7 +415,6 @@ function addWell(actual, expected, rootword, isCorrect)
     .append(mods)
   );
 
-  console.log(expected, $.unique(expected));
   var expected_link = $("<a/>")
   .html($.unique(expected).join('<br />'))
   .addClass("answers")
