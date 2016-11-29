@@ -12,14 +12,17 @@ function Modifier(flags, modFunc, nextMod) {
   };
 }
 
-function Term(word, kanji, def) {
+function Term(word, kanji, ruby, def) {
     if(this instanceof Term == false)
       return new Term(word, kanji, def);
     this.word = word;
     this.kanji = '';
+    this.ruby = word;
+
     if ($("#opt-kanji:checked").length == 0)
       this.kanji = kanji;
-    this.ruby = addFurigana(kanji || word, word);
+    if (this.kanji)
+      this.ruby = ruby;
     this.def = def;
 };
 
@@ -29,9 +32,9 @@ Term.prototype.render = function()
     return this.word;
 
   if ($("#opt-furigana:checked").length == 1)
-    return this.ruby = addFurigana(this.kanji || this.word, this.word);
+    return this.ruby || this.word;
 
-  return this.ruby = this.kanji || this.word;
+  return this.kanji || this.word;
 }
 
 var KANA_FAM = {
