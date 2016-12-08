@@ -412,7 +412,15 @@ function addWell(actual, expected, rootword, isCorrect)
     .addClass("well-right")
     .addClass("mods")
     .append(def + " &mdash; ")
-    .append(mods)
+    .append(mods + " ")
+    .append(
+      $("<span/>")
+      .addClass('debug')
+      .text('≟')
+      .attr({
+        title: "Click to view conjugations."
+      })
+    )
   );
 
   var expected_link = $("<a/>")
@@ -447,14 +455,6 @@ function addWell(actual, expected, rootword, isCorrect)
     w.addClass('skipped')
     .append(wellLeft);
   }
-
-  //*
-  w.append(
-    $("<span/>")
-    .addClass('debug')
-    .text('debug')
-  );
-  //*/
 
   w.append(
     $('<div/>').addClass('clear')
