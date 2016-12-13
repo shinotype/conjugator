@@ -125,6 +125,7 @@ $(document).ready(function() {
       ModTypes.PAST,
       ModTypes.NEGATIVE,
       ModTypes.TE,
+      ModTypes.WANTING,
       ModTypes.VOLITIONAL,
       ModTypes.POTENTIAL,
       ModTypes.CAUSATIVE,

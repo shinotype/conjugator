@@ -101,6 +101,7 @@ var ModTypes = {
   PAST: ['Past', 'past'],
   NEGATIVE: ['Negative' ,'negative'],
   TE: ['て-form', 'verbte'],
+  WANTING: ["Wanting", "wanting"],
   VOLITIONAL: ['Volitional', 'volitional'],
   POTENTIAL: ['Potential', 'potential'],
   CAUSATIVE: ['Causative', 'causative'],
@@ -163,8 +164,20 @@ var ICHIDAN = [
         return trimLast(w) + 'て';
     }),
     Modifier([ModTypes.NEGATIVE], function(w) {
-        return w　+ 'ない';
+        return trimLast(w)　+ 'ない';
     }, NAIFORM),
+    Modifier([ModTypes.WANTING], function(w) {
+        return trimLast(w) + 'たい';
+    }),
+    Modifier([ModTypes.PAST, ModTypes.WANTING], function(w) {
+        return trimLast(w) + 'たかった';
+    }),
+    Modifier([ModTypes.NEGATIVE, ModTypes.WANTING], function(w) {
+        return trimLast(w) + 'たくない';
+    }),
+    Modifier([ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.WANTING], function(w) {
+        return trimLast(w) + 'たくなかった';
+    }),
     Modifier([ModTypes.POTENTIAL], function(w) {
         return trimLast(w) + 'られる';
     }, ICHIVERB),
@@ -298,6 +311,19 @@ var GODAN = [
   }),
   Modifier([ModTypes.SEEMSLIKE, ModTypes.NEGATIVE], function(w) {
       return trimLast(w) + Mogrify.A(snipLast(w)) + 'なさそう';
+  }),
+  //
+  Modifier([ModTypes.WANTING], function(w) {
+      return trimLast(w) + Mogrify.I(snipLast(w)) + 'たい';
+  }),
+  Modifier([ModTypes.PAST, ModTypes.WANTING], function(w) {
+      return trimLast(w) + Mogrify.I(snipLast(w)) + 'たかった';
+  }),
+  Modifier([ModTypes.NEGATIVE, ModTypes.WANTING], function(w) {
+      return trimLast(w) + Mogrify.I(snipLast(w)) + 'たくない';
+  }),
+  Modifier([ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.WANTING], function(w) {
+      return trimLast(w) + Mogrify.I(snipLast(w)) +  'たくなかった';
   }),
 ]
 
