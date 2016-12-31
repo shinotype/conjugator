@@ -77,7 +77,7 @@ var ichidan = [
   new Term('しらせる', '知らせる', '<ruby>知<rp>(</rp><rt>し</rt><rp>)</rp></ruby>らせる', 'to notify'),
   new Term('しらべる', '調べる', '<ruby>調<rp>(</rp><rt>しら</rt><rp>)</rp></ruby>べる', 'to check, investigate'),
   new Term('しんじる', '信じる', '<ruby>信<rp>(</rp><rt>しん</rt><rp>)</rp></ruby>じる', 'to believe, trust'),
-  new Term('すぎる', '過ぎる', '<ruby>過<rp>(</rp><rt>よ</rt><rp>)</rp></ruby>ぎる', 'to pass, exceed'),
+  new Term('すぎる', '過ぎる', '<ruby>過<rp>(</rp><rt>す</rt><rp>)</rp></ruby>ぎる', 'to pass, exceed'),
   new Term('すぐれる', '優れる', '<ruby>優<rp>(</rp><rt>すぐ</rt><rp>)</rp></ruby>れる', 'to excel, be excellent, be superior'),
   new Term('すてる', '捨てる', '<ruby>捨<rp>(</rp><rt>す</rt><rp>)</rp></ruby>てる', 'to throw away'),
   new Term('そだてる', '育てる', '<ruby>育<rp>(</rp><rt>そだ</rt><rp>)</rp></ruby>てる', 'to bring up a child, train'),
