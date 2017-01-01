@@ -326,7 +326,7 @@ var godan = [
   new Term('どじる', null, null, 'to mess up'),
   new Term('なおす', '直す', '<ruby>直<rp>(</rp><rt>なお</rt><rp>)</rp></ruby>す', 'to repair, cure'),
   new Term('なおる', '治る', '<ruby>治<rp>(</rp><rt>なお</rt><rp>)</rp></ruby>る', 'to be cured, healed'),
-  new Term('ながす', '流がす', '<ruby>流<rp>(</rp><rt>りゅう</rt><rp>)</rp></ruby>がす', 'to pour, let flow'),
+  new Term('ながす', '流す', '<ruby>流<rp>(</rp><rt>なが</rt><rp>)</rp></ruby>す', 'to pour, let flow'),
   new Term('なく', '鳴く', '<ruby>鳴<rp>(</rp><rt>な</rt><rp>)</rp></ruby>く', 'to cry'),
   new Term('なくす', '無くす', '<ruby>無<rp>(</rp><rt>な</rt><rp>)</rp></ruby>くす', 'to lose, remove'),
   new Term('なくなる', '無くなる', '<ruby>無<rp>(</rp><rt>な</rt><rp>)</rp></ruby>くなる', 'to be missing, vanish'),
