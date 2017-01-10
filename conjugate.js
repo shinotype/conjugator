@@ -131,7 +131,7 @@ $(document).ready(function() {
       ModTypes.CAUSATIVE,
       ModTypes.PASSIVE,
       ModTypes.PROGRESSIVE,
-      ModTypes.IMPERITIVE,
+      ModTypes.IMPERATIVE,
       ModTypes.PROBABLE,
       ModTypes.CONDITIONAL,
       ModTypes.REQUEST,

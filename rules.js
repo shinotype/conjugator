@@ -107,7 +107,7 @@ var ModTypes = {
   CAUSATIVE: ['Causative', 'causative'],
   PASSIVE: ['Passive', 'passive'],
   PROGRESSIVE: ['Progressive', 'progressive'],
-  IMPERITIVE: ['Imperitive', 'imperitive'],
+  IMPERATIVE: ['Imperative', 'imperative'],
   PROBABLE: ['Probable', 'probable'],
   CONDITIONAL: ['Conditional', 'conditional'],
   REQUEST: ['Request', 'request'],
@@ -117,9 +117,6 @@ var ModTypes = {
 var NAIFORM = [
     new Modifier([ModTypes.INFORMAL], function(w) {
         return w;
-    }),
-    new Modifier([ModTypes.TE], function(w) {
-        return w + 'くて';
     }),
     new Modifier([ModTypes.CONDITIONAL], function(w) {
         return w + 'ければ';
@@ -166,6 +163,9 @@ var ICHIDAN = [
     Modifier([ModTypes.NEGATIVE], function(w) {
         return trimLast(w)　+ 'ない';
     }, NAIFORM),
+    new Modifier([ModTypes.NEGATIVE, ModTypes.TE], function(w) {
+        return trimLast(w) + 'てない';
+    }),
     Modifier([ModTypes.WANTING], function(w) {
         return trimLast(w) + 'たい';
     }),
@@ -303,7 +303,7 @@ var GODAN = [
   Modifier([ModTypes.CAUSATIVE, ModTypes.PASSIVE], function(w) {
       return trimLast(w) + Mogrify.A(snipLast(w)) + 'せられる';
   }),
-  Modifier([ModTypes.IMPERITIVE], function(w) {
+  Modifier([ModTypes.IMPERATIVE], function(w) {
       return trimLast(w) + Mogrify.E(snipLast(w));
   }),
   Modifier([ModTypes.SEEMSLIKE], function(w) {
@@ -347,7 +347,7 @@ var irreg_do = [
       passive: "される",
       causative: "させる",
       potential: "できる",
-      imperitive: "しろ",
+      imperative: "しろ",
       conditional: "すれば",
     },
     {
@@ -369,7 +369,7 @@ var irreg_do = [
       passive: "こられる",
       causative: "こさせる",
       potential: "これる",
-      imperitive: "こい",
+      imperative: "こい",
       conditional: "くれば",
     },
 ]
@@ -482,8 +482,8 @@ var IRREGULAR_DO = [
   Modifier([ModTypes.POTENTIAL], function(w){
     return irreg_get(irreg_do, w).potential;
   }),
-  Modifier([ModTypes.IMPERITIVE], function(w){
-    return irreg_get(irreg_do, w).imperitive;
+  Modifier([ModTypes.IMPERATIVE], function(w){
+    return irreg_get(irreg_do, w).imperative;
   }),
   Modifier([ModTypes.CONDITIONAL], function(w){
     return irreg_get(irreg_do, w).conditional;
@@ -532,6 +532,9 @@ var II_ADJECTIVE = [
   }),
   Modifier(ModTypes.TE, function(w){
     return trimLast(w) + 'くて';
+  }),
+  Modifier([ModTypes.NEGATIVE, ModTypes.TE], function(w){
+    return trimLast(w) + 'てない';
   }),
   Modifier([ModTypes.SEEMSLIKE], function(w){
     return trimLast(w) + 'そう';
