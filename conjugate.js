@@ -92,14 +92,6 @@ $(document).ready(function() {
         w.append(q.word + " - " + desc.join(', '))
         .append("<br />");
       }
-
-      if(mod.nextMod)
-      {
-        mod.nextMod.forEach(function(nm)
-        {
-          debugMod(term, nm, w, newmods);
-        });
-      }
     };
 
     $('#well').on('click', '.debug', debugTerm);
@@ -180,11 +172,6 @@ Question.prototype.modify = function(modSet, skipNext) {
     if(this.kanji)
       this.kanji = modifier.modFunc(this.kanji);
     this.modList.push.apply(this.modList, modifier.desc);
-
-    // If theres a next mod, apply it too
-    if (modifier.nextMod && !skipNext) {
-        this.modify(modifier.nextMod.filter(filterMod));
-    }
 }
 
 // Fetches a random element of an array
