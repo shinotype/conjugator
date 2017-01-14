@@ -1,0 +1,75 @@
+TODO:
+- revamp irregular verbs
+- double-check/expand adjectives
+
+
+
+// --- NOTES
+
+// 000
+informal indicative
+informal progressive
+informal volitional
+informal imperative
+informal potential
+informal conditional (reba)
+informal conditional (tara)
+informal passive
+informal causative
+
+// 001
+informal past indicative
+informal past progressive
+informal past potential
+informal past passive
+informal past causative
+
+// 010
+informal negative indicative
+informal negative progressive
+informal negative imperative
+informal negative volitional
+informal negative potential
+informal negative conditional (reba)
+informal negative conditional (tara)
+informal negative passive
+informal negative causative
+
+// 011
+informal negative past indicative
+informal negative past progressive
+informal negative past potential
+informal negative past passive
+informal negative past causative
+
+// 100
+polite indicative
+polite progressive
+polite volitional
+polite imperative
+polite potential
+polite passive
+polite causative
+
+// 101
+polite past indicative
+polite past progressive
+polite past potential
+polite past passive
+polite past causative
+
+// 110
+polite negative indicative
+polite negative progressive
+polite negative potential
+polite negative imperative
+polite negative volitional
+polite negative passive
+polite negative causative
+
+// 111
+polite negative past indicative
+polite negative past progressive
+polite negative past potential
+polite negative past passive
+polite negative past causative
