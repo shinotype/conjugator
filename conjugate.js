@@ -132,11 +132,8 @@ $(document).ready(function() {
       ModTypes.PASSIVE,
       ModTypes.PROGRESSIVE,
       ModTypes.IMPERATIVE,
-      ModTypes.PROBABLE,
       ModTypes.CONDITIONAL_REBA,
       ModTypes.CONDITIONAL_TARA,
-      ModTypes.REQUEST,
-      ModTypes.SEEMSLIKE,
     ]);
 
     genOpts('verb-options',[

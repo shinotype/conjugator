@@ -321,6 +321,26 @@ var ICHIDAN = [
     // polite negative past causative
     Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.CAUSATIVE], function(w) {
         return trimLast(w) + 'させませんでした';
+    }),
+    // te
+    Modifier([ModTypes.TE], function(w) {
+        return trimLast(w) + 'て';
+    }),
+    // wanting
+    Modifier([ModTypes.WANTING], function(w) {
+      return trimLast(w) + 'たい';
+    }),
+    // negative wanting
+    Modifier([ModTypes.WANTING, ModTypes.PAST], function(w) {
+      return trimLast(w) + 'たくない';
+    }),
+    // past wanting
+    Modifier([ModTypes.WANTING, ModTypes.NEGATIVE], function(w) {
+      return trimLast(w) + 'たかった';
+    }),
+    // negative past wanting
+    Modifier([ModTypes.WANTING, ModTypes.NEGATIVE, ModTypes.PAST], function(w) {
+      return trimLast(w) + 'たくなかった';
     })
 ];
 
