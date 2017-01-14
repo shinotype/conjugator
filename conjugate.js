@@ -133,7 +133,8 @@ $(document).ready(function() {
       ModTypes.PROGRESSIVE,
       ModTypes.IMPERATIVE,
       ModTypes.PROBABLE,
-      ModTypes.CONDITIONAL,
+      ModTypes.CONDITIONAL_REBA,
+      ModTypes.CONDITIONAL_TARA,
       ModTypes.REQUEST,
       ModTypes.SEEMSLIKE,
     ]);

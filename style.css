@@ -301,6 +301,10 @@ input[type=checkbox] {
   text-decoration: line-through;
 }
 
+.debug{
+  cursor: pointer;
+}
+
 .debug-out{
   background-color: yellow;
 }
