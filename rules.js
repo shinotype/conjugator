@@ -107,7 +107,7 @@ var ModTypes = {
   PROGRESSIVE: ['Progressive', 'progressive'],
   IMPERATIVE: ['Imperative', 'imperative'],
   // PROBABLE: ['Probable', 'probable'],
-  CONDITIONAL_REBA: ['Conditional (-えば)', 'conditional_reba'],
+  CONDITIONAL_BA: ['Conditional (-ば)', 'conditional_ba'],
   CONDITIONAL_TARA: ['Conditional (-たら)', 'conditional_tara']
 };
 
@@ -133,7 +133,7 @@ var ICHIDAN = [
         return trimLast(w) + 'られる';
     }),
     // informal conditional (reba)
-    Modifier([ModTypes.INFORMAL, ModTypes.CONDITIONAL_REBA], function(w) {
+    Modifier([ModTypes.INFORMAL, ModTypes.CONDITIONAL_BA], function(w) {
         return trimLast(w) + 'れば';
     }),
     // informal conditional (tara)
@@ -169,7 +169,7 @@ var ICHIDAN = [
         return trimLast(w) + 'られない';
     }),
     // informal negative conditional (reba)
-    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.CONDITIONAL_REBA], function(w) {
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.CONDITIONAL_BA], function(w) {
         return trimLast(w) + 'なければ';
     }),
     // informal negative conditional (tara)
@@ -393,7 +393,7 @@ var GODAN = [
       return trimLast(w) + Mogrify.E(snipLast(w)) + 'る';
   }),
   // informal conditional (reba)
-  Modifier([ModTypes.INFORMAL, ModTypes.CONDITIONAL_REBA], function(w) {
+  Modifier([ModTypes.INFORMAL, ModTypes.CONDITIONAL_BA], function(w) {
       return trimLast(w) + Mogrify.E(snipLast(w)) + 'ば';
   }),
   // informal conditional (tara)
@@ -430,7 +430,7 @@ var GODAN = [
       return trimLast(w) + Mogrify.E(snipLast(w)) + 'ない';
   }),
   // informal negative conditional (reba)
-  Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.CONDITIONAL_REBA], function(w) {
+  Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.CONDITIONAL_BA], function(w) {
       return trimLast(w) + Mogrify.A(snipLast(w)) + 'なければ';
   }),
   // informal negative conditional (tara)
@@ -761,7 +761,7 @@ var IRREGULAR_DO = [
   Modifier([ModTypes.IMPERATIVE], function(w){
     return irreg_get(irreg_do, w).imperative;
   }),
-  Modifier([ModTypes.CONDITIONAL_REBA], function(w){
+  Modifier([ModTypes.CONDITIONAL_BA], function(w){
     return irreg_get(irreg_do, w).conditional;
   }),
 ]

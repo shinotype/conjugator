@@ -124,14 +124,14 @@ $(document).ready(function() {
       ModTypes.PASSIVE,
       ModTypes.PROGRESSIVE,
       ModTypes.IMPERATIVE,
-      ModTypes.CONDITIONAL_REBA,
+      ModTypes.CONDITIONAL_BA,
       ModTypes.CONDITIONAL_TARA,
     ]);
 
     genOpts('verb-options',[
-      ['ichidan (-いる,　-える)', 'ichidan'],
-      ['godan', 'godan'],
-      ['irregular', 'irregular'],
+      ['Ichidan (-いる,　-える)', 'ichidan'],
+      ['Godan', 'godan'],
+      ['Irregular', 'irregular'],
     ]);
 
     genOpts('kanji-options',[
