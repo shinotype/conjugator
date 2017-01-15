@@ -604,186 +604,6 @@ var GODAN = [
   })
 ];
 
-var irreg_do = [
-    {
-      base: "する",
-      kanji: "為る",
-      polite: "します",
-      te: "して",
-
-      past: "した",
-      polpast: "しました",
-
-      neg: "しない",
-      polneg: "しません",
-
-      pastneg: "しなかった",
-      polpastneg: "しませんでした",
-
-      volitional: "しよう",
-      passive: "される",
-      causative: "させる",
-      potential: "できる",
-      imperative: "しろ",
-      conditional: "すれば",
-    },
-    {
-      base: "くる",
-      kanji: "来る",
-      polite: "きます",
-      te: "きて",
-
-      past: "きた",
-      polpast: "きました",
-
-      neg: "こない",
-      polneg: "きません",
-
-      pastneg: "こなかった",
-      polpastneg: "きませんでした",
-
-      volitional: "こよう",
-      passive: "こられる",
-      causative: "こさせる",
-      potential: "これる",
-      imperative: "こい",
-      conditional: "くれば",
-    },
-]
-
-var irreg_exist = [
-    {
-      base: "だ",
-      polite: "です",
-
-      past: "だった",
-      polpast: "でした",
-
-      neg: "ではない",
-      polneg: "ではありません",
-
-      pastneg: "ではなかった",
-      polpastneg: "ではありませんでした",
-
-      probable: "だろう",
-      polprobable: "でしょう",
-
-      negprob: "ではないだろう",
-      polnegprob: "ではないでしょう",
-    },
-    {
-      base: "ある",
-      polite: "あります",
-
-      past: "あった",
-      polpast: "ありました",
-
-      neg: "ない",
-      polneg: "ありません",
-
-      pastneg: "なかった",
-      polpastneg: "ありませんでした",
-
-      probable: "あるだろう",
-      polprobable: "あるでしょう",
-
-      negprob: "ないだろう",
-      polnegprob: "ないでしょう",
-    },
-    {
-      base: "いる",
-      polite: "います",
-
-      past: "いった",
-      polpast: "いました",
-
-      neg: "いない",
-      polneg: "いません",
-
-      pastneg: "いなかった",
-      polpastneg: "いませんでした",
-
-      probable: "いるだろう",
-      polprobable: "いるでしょう",
-
-      negprob: "いないだろう",
-      polnegprob: "いないでしょう",
-    }
-];
-
-function irreg_get(terms, w) {
-  var i, t;
-  for(i=0;i<terms.length;i++)
-  {
-    t = terms[i];
-    if(t.base.localeCompare(w) == 0)
-      return t;
-    if('kanji' in t && t.kanji.localeCompare(w) == 0)
-      return t;
-  }
-  console.error('No irregular term for: ' + w);
-}
-
-var IRREGULAR_DO = [
-  Modifier([ModTypes.FORMAL], function(w){
-    return irreg_get(irreg_do, w).polite;
-  }),
-  Modifier([ModTypes.TE], function(w){
-    return irreg_get(irreg_do, w).te;
-  }),
-  Modifier(ModTypes.PAST, function(w){
-    return irreg_get(irreg_do, w).past;
-  }),
-  Modifier([ModTypes.FORMAL, ModTypes.PAST], function(w){
-    return irreg_get(irreg_do, w).polpast;
-  }),
-  Modifier([ModTypes.NEGATIVE], function(w){
-    return irreg_get(irreg_do, w).neg;
-  }),
-  Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE], function(w){
-    return irreg_get(irreg_do, w).polneg;
-  }),
-  Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PAST], function(w){
-    return irreg_get(irreg_do, w).pastneg;
-  }),
-  Modifier([ModTypes.VOLITIONAL], function(w){
-    return irreg_get(irreg_do, w).volitional;
-  }),
-  Modifier([ModTypes.PASSIVE], function(w){
-    return irreg_get(irreg_do, w).passive;
-  }),
-  Modifier([ModTypes.CAUSATIVE], function(w){
-    return irreg_get(irreg_do, w).causative;
-  }),
-  Modifier([ModTypes.POTENTIAL], function(w){
-    return irreg_get(irreg_do, w).potential;
-  }),
-  Modifier([ModTypes.IMPERATIVE], function(w){
-    return irreg_get(irreg_do, w).imperative;
-  }),
-  Modifier([ModTypes.CONDITIONAL_BA], function(w){
-    return irreg_get(irreg_do, w).conditional;
-  }),
-]
-
-var IRREGULAR_EXIST = [
-  Modifier([ModTypes.FORMAL], function(w){
-    return irreg_get(irreg_exist, w).polite;
-  }),
-  Modifier([ModTypes.PROBABLE], function(w){
-    return irreg_get(irreg_exist, w).probable;
-  }),
-  Modifier([ModTypes.FORMAL, ModTypes.PROBABLE], function(w){
-    return irreg_get(irreg_exist, w).polprobable;
-  }),
-  Modifier([ModTypes.NEGATIVE, ModTypes.PROBABLE], function(w){
-    return irreg_get(irreg_exist, w).negprob;
-  }),
-  Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PROBABLE], function(w){
-    return irreg_get(irreg_exist, w).polnegprob;
-  }),
-]
-
 var II_ADJECTIVE = [
   Modifier([ModTypes.FORMAL], function(w){
     return w + 'です';
@@ -843,3 +663,895 @@ var NA_ADJECTIVE = [
     return w + 'で';
   })
 ]
+
+var IRREGULAR_SURU = [
+    // informal indicative
+    Modifier([ModTypes.INFORMAL], function(w) {
+        return 'する';
+    }),
+    // informal progressive
+    Modifier([ModTypes.INFORMAL, ModTypes.PROGRESSIVE], function(w) {
+        return 'している';
+    }),
+    // informal volitional
+    Modifier([ModTypes.INFORMAL, ModTypes.VOLITIONAL], function(w) {
+        return 'しよう';
+    }),
+    // informal imperative
+    Modifier([ModTypes.INFORMAL, ModTypes.IMPERATIVE], function(w) {
+        return 'しる';
+    }),
+    // informal potential
+    Modifier([ModTypes.INFORMAL, ModTypes.POTENTIAL], function(w) {
+        return 'できる';
+    }),
+    // informal conditional (reba)
+    Modifier([ModTypes.INFORMAL, ModTypes.CONDITIONAL_BA], function(w) {
+        return 'すれば';
+    }),
+    // informal conditional (tara)
+    Modifier([ModTypes.INFORMAL, ModTypes.CONDITIONAL_TARA], function(w) {
+        return 'したら';
+    }),
+    // informal passive
+    Modifier([ModTypes.INFORMAL, ModTypes.PASSIVE], function(w) {
+        return 'される';
+    }),
+    // informal causative
+    Modifier([ModTypes.INFORMAL, ModTypes.CAUSATIVE], function(w) {
+        return 'させる';
+    }),
+    // informal negative indicative
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE], function(w) {
+        return 'しない';
+    }),
+    // informal negative progressive
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.PROGRESSIVE], function(w) {
+        return 'していない';
+    }),
+    // informal negative imperative
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.IMPERATIVE], function(w) {
+        return 'するな';
+    }),
+    // informal negative volitional
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.VOLITIONAL], function(w) {
+        return 'するまい';
+    }),
+    // informal negative potential
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.POTENTIAL], function(w) {
+        return 'できない';
+    }),
+    // informal negative conditional (reba)
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.CONDITIONAL_BA], function(w) {
+        return 'しないければ';
+    }),
+    // informal negative conditional (tara)
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.CONDITIONAL_TARA], function(w) {
+        return 'しないかったら';
+    }),
+    // informal negative passive
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.PASSIVE], function(w) {
+        return 'されない';
+    }),
+    // informal negative causative
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.CAUSATIVE], function(w) {
+        return 'させない';
+    }),
+    // informal past indicative
+    Modifier([ModTypes.INFORMAL], function(w) {
+        return 'した';
+    }),
+    // informal past progressive
+    Modifier([ModTypes.INFORMAL, ModTypes.PAST, ModTypes.PROGRESSIVE], function(w) {
+        return 'していた';
+    }),
+    // informal past potential
+    Modifier([ModTypes.INFORMAL, ModTypes.PAST, ModTypes.POTENTIAL], function(w) {
+        return 'できた';
+    }),
+    // informal past passive
+    Modifier([ModTypes.INFORMAL, ModTypes.PAST, ModTypes.PASSIVE], function(w) {
+        return 'された';
+    }),
+    // informal past causative
+    Modifier([ModTypes.INFORMAL, ModTypes.PAST, ModTypes.CAUSATIVE], function(w) {
+        return 'させた';
+    }),
+    // informal negative past indicative
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.PAST], function(w) {
+        return 'しなかった';
+    }),
+    // informal negative past progressive
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.PROGRESSIVE], function(w) {
+        return 'していなかった';
+    }),
+    // informal negative past potential
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.POTENTIAL], function(w) {
+        return 'できなかった';
+    }),
+    // informal negative past passive
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.PASSIVE], function(w) {
+        return 'されなかった';
+    }),
+    // informal negative past causative
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.CAUSATIVE], function(w) {
+        return 'させなかった';
+    }),
+    // polite indicative
+    Modifier([ModTypes.FORMAL], function(w) {
+        return 'します';
+    }),
+    // polite progressive
+    Modifier([ModTypes.FORMAL, ModTypes.PROGRESSIVE], function(w) {
+        return 'しています';
+    }),
+    // polite volitional
+    Modifier([ModTypes.FORMAL, ModTypes.VOLITIONAL], function(w) {
+        return 'しましょう';
+    }),
+    // polite imperative
+    Modifier([ModTypes.FORMAL, ModTypes.IMPERATIVE], function(w) {
+        return 'しています';
+    }),
+    // polite potential
+    Modifier([ModTypes.FORMAL, ModTypes.POTENTIAL], function(w) {
+        return 'できます';
+    }),
+    // polite passive
+    Modifier([ModTypes.FORMAL, ModTypes.PASSIVE], function(w) {
+        return 'されます';
+    }),
+    // polite causative
+    Modifier([ModTypes.FORMAL, ModTypes.CAUSATIVE], function(w) {
+        return 'させます';
+    }),
+    // polite past indicative
+    Modifier([ModTypes.FORMAL, ModTypes.PAST], function(w) {
+        return 'しました';
+    }),
+    // polite past progressive
+    Modifier([ModTypes.FORMAL, ModTypes.PAST, ModTypes.PROGRESSIVE], function(w) {
+        return 'していました';
+    }),
+    // polite past potential
+    Modifier([ModTypes.FORMAL, ModTypes.PAST, ModTypes.POTENTIAL], function(w) {
+        return 'できました';
+    }),
+    // polite past passive
+    Modifier([ModTypes.FORMAL, ModTypes.PAST, ModTypes.PASSIVE], function(w) {
+        return 'されました';
+    }),
+    // polite past causative
+    Modifier([ModTypes.FORMAL, ModTypes.PAST, ModTypes.CAUSATIVE], function(w) {
+        return 'させました';
+    }),
+    // polite negative indicative
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE], function(w) {
+        return 'しません';
+    }),
+    // polite negative progressive
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PROGRESSIVE], function(w) {
+        return 'していません';
+    }),
+    // polite negative potential
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.POTENTIAL], function(w) {
+        return 'できません';
+    }),
+    // polite negative imperative
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.IMPERATIVE], function(w) {
+        return 'しないでください';
+    }),
+    // polite negative volitional
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.VOLITIONAL], function(w) {
+        return 'しますまい';
+    }),
+    // polite negative passive
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PASSIVE], function(w) {
+        return 'されません';
+    }),
+    // polite negative causative
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.CAUSATIVE], function(w) {
+        return 'させません';
+    }),
+    // polite negative past indicative
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PAST], function(w) {
+        return 'しませんでした';
+    }),
+    // polite negative past progressive
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.PROGRESSIVE], function(w) {
+        return 'していませんでした';
+    }),
+    // polite negative past potential
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.POTENTIAL], function(w) {
+        return 'できませんでした';
+    }),
+    // polite negative past passive
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.PASSIVE], function(w) {
+        return 'されませんでした';
+    }),
+    // polite negative past causative
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.CAUSATIVE], function(w) {
+        return 'させませんでした';
+    }),
+    // te
+    Modifier([ModTypes.TE], function(w) {
+        return 'して';
+    }),
+    // wanting
+    Modifier([ModTypes.WANTING], function(w) {
+      return 'したい';
+    }),
+    // negative wanting
+    Modifier([ModTypes.WANTING, ModTypes.PAST], function(w) {
+      return 'したくない';
+    }),
+    // past wanting
+    Modifier([ModTypes.WANTING, ModTypes.NEGATIVE], function(w) {
+      return 'したかった';
+    }),
+    // negative past wanting
+    Modifier([ModTypes.WANTING, ModTypes.NEGATIVE, ModTypes.PAST], function(w) {
+      return 'したくなかった';
+    })
+];
+
+var IRREGULAR_KURU = [
+    // informal indicative
+    Modifier([ModTypes.INFORMAL], function(w) {
+        return 'くる';
+    }),
+    // informal progressive
+    Modifier([ModTypes.INFORMAL, ModTypes.PROGRESSIVE], function(w) {
+        return 'きている';
+    }),
+    // informal volitional
+    Modifier([ModTypes.INFORMAL, ModTypes.VOLITIONAL], function(w) {
+        return 'こよう';
+    }),
+    // informal imperative
+    Modifier([ModTypes.INFORMAL, ModTypes.IMPERATIVE], function(w) {
+        return 'こい';
+    }),
+    // informal potential
+    Modifier([ModTypes.INFORMAL, ModTypes.POTENTIAL], function(w) {
+        return 'こられる';
+    }),
+    // informal conditional (reba)
+    Modifier([ModTypes.INFORMAL, ModTypes.CONDITIONAL_BA], function(w) {
+        return 'くれば';
+    }),
+    // informal conditional (tara)
+    Modifier([ModTypes.INFORMAL, ModTypes.CONDITIONAL_TARA], function(w) {
+        return 'きたら';
+    }),
+    // informal passive
+    Modifier([ModTypes.INFORMAL, ModTypes.PASSIVE], function(w) {
+        return 'こられる';
+    }),
+    // informal causative
+    Modifier([ModTypes.INFORMAL, ModTypes.CAUSATIVE], function(w) {
+        return 'こさせる';
+    }),
+    // informal negative indicative
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE], function(w) {
+        return 'こない';
+    }),
+    // informal negative progressive
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.PROGRESSIVE], function(w) {
+        return 'きていない';
+    }),
+    // informal negative imperative
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.IMPERATIVE], function(w) {
+        return 'くるな';
+    }),
+    // informal negative volitional
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.VOLITIONAL], function(w) {
+        return 'くるまい';
+    }),
+    // informal negative potential
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.POTENTIAL], function(w) {
+        return 'こられない';
+    }),
+    // informal negative conditional (reba)
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.CONDITIONAL_BA], function(w) {
+        return 'こなければ';
+    }),
+    // informal negative conditional (tara)
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.CONDITIONAL_TARA], function(w) {
+        return 'こなかったら';
+    }),
+    // informal negative passive
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.PASSIVE], function(w) {
+        return 'こられない';
+    }),
+    // informal negative causative
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.CAUSATIVE], function(w) {
+        return 'こさせない';
+    }),
+    // informal past indicative
+    Modifier([ModTypes.INFORMAL], function(w) {
+        return 'きた';
+    }),
+    // informal past progressive
+    Modifier([ModTypes.INFORMAL, ModTypes.PAST, ModTypes.PROGRESSIVE], function(w) {
+        return 'きていた';
+    }),
+    // informal past potential
+    Modifier([ModTypes.INFORMAL, ModTypes.PAST, ModTypes.POTENTIAL], function(w) {
+        return 'こられた';
+    }),
+    // informal past passive
+    Modifier([ModTypes.INFORMAL, ModTypes.PAST, ModTypes.PASSIVE], function(w) {
+        return 'こられた';
+    }),
+    // informal past causative
+    Modifier([ModTypes.INFORMAL, ModTypes.PAST, ModTypes.CAUSATIVE], function(w) {
+        return 'こさせた';
+    }),
+    // informal negative past indicative
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.PAST], function(w) {
+        return 'こなかった';
+    }),
+    // informal negative past progressive
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.PROGRESSIVE], function(w) {
+        return 'きていなかった';
+    }),
+    // informal negative past potential
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.POTENTIAL], function(w) {
+        return 'こられなかった';
+    }),
+    // informal negative past passive
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.PASSIVE], function(w) {
+        return 'こられなかった';
+    }),
+    // informal negative past causative
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.CAUSATIVE], function(w) {
+        return 'こさせなかった';
+    }),
+    // polite indicative
+    Modifier([ModTypes.FORMAL], function(w) {
+        return 'きます';
+    }),
+    // polite progressive
+    Modifier([ModTypes.FORMAL, ModTypes.PROGRESSIVE], function(w) {
+        return 'きています';
+    }),
+    // polite volitional
+    Modifier([ModTypes.FORMAL, ModTypes.VOLITIONAL], function(w) {
+        return 'きましょう';
+    }),
+    // polite imperative
+    Modifier([ModTypes.FORMAL, ModTypes.IMPERATIVE], function(w) {
+        return 'きてください';
+    }),
+    // polite potential
+    Modifier([ModTypes.FORMAL, ModTypes.POTENTIAL], function(w) {
+        return 'こられます';
+    }),
+    // polite passive
+    Modifier([ModTypes.FORMAL, ModTypes.PASSIVE], function(w) {
+        return 'こられます';
+    }),
+    // polite causative
+    Modifier([ModTypes.FORMAL, ModTypes.CAUSATIVE], function(w) {
+        return 'こさせます';
+    }),
+    // polite past indicative
+    Modifier([ModTypes.FORMAL, ModTypes.PAST], function(w) {
+        return 'きました';
+    }),
+    // polite past progressive
+    Modifier([ModTypes.FORMAL, ModTypes.PAST, ModTypes.PROGRESSIVE], function(w) {
+        return 'きていました';
+    }),
+    // polite past potential
+    Modifier([ModTypes.FORMAL, ModTypes.PAST, ModTypes.POTENTIAL], function(w) {
+        return 'こられました';
+    }),
+    // polite past passive
+    Modifier([ModTypes.FORMAL, ModTypes.PAST, ModTypes.PASSIVE], function(w) {
+        return 'こられました';
+    }),
+    // polite past causative
+    Modifier([ModTypes.FORMAL, ModTypes.PAST, ModTypes.CAUSATIVE], function(w) {
+        return 'こさせました';
+    }),
+    // polite negative indicative
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE], function(w) {
+        return 'きません';
+    }),
+    // polite negative progressive
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PROGRESSIVE], function(w) {
+        return 'きていません';
+    }),
+    // polite negative potential
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.POTENTIAL], function(w) {
+        return 'こられません';
+    }),
+    // polite negative imperative
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.IMPERATIVE], function(w) {
+        return 'こないでください';
+    }),
+    // polite negative volitional
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.VOLITIONAL], function(w) {
+        return 'きますまい';
+    }),
+    // polite negative passive
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PASSIVE], function(w) {
+        return 'こられません';
+    }),
+    // polite negative causative
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.CAUSATIVE], function(w) {
+        return 'こさせません';
+    }),
+    // polite negative past indicative
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PAST], function(w) {
+        return 'きませんでした';
+    }),
+    // polite negative past progressive
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.PROGRESSIVE], function(w) {
+        return 'きていませんでした';
+    }),
+    // polite negative past potential
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.POTENTIAL], function(w) {
+        return 'こられませんでした';
+    }),
+    // polite negative past passive
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.PASSIVE], function(w) {
+        return 'こられませんでした';
+    }),
+    // polite negative past causative
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.CAUSATIVE], function(w) {
+        return 'こさせませんでした';
+    }),
+    // te
+    Modifier([ModTypes.TE], function(w) {
+        return 'きて';
+    }),
+    // wanting
+    Modifier([ModTypes.WANTING], function(w) {
+      return 'きたい';
+    }),
+    // negative wanting
+    Modifier([ModTypes.WANTING, ModTypes.PAST], function(w) {
+      return 'きたくない';
+    }),
+    // past wanting
+    Modifier([ModTypes.WANTING, ModTypes.NEGATIVE], function(w) {
+      return 'きたかった';
+    }),
+    // negative past wanting
+    Modifier([ModTypes.WANTING, ModTypes.NEGATIVE, ModTypes.PAST], function(w) {
+      return 'きたくなかった';
+    })
+];
+
+var TO_BE_IRU = [
+    // informal indicative
+    Modifier([ModTypes.INFORMAL], function(w) {
+        return 'いる';
+    }),
+    // informal progressive
+    Modifier([ModTypes.INFORMAL, ModTypes.PROGRESSIVE], function(w) {
+        return 'いている';
+    }),
+    // informal volitional
+    Modifier([ModTypes.INFORMAL, ModTypes.VOLITIONAL], function(w) {
+        return 'いよう';
+    }),
+    // informal imperative
+    Modifier([ModTypes.INFORMAL, ModTypes.IMPERATIVE], function(w) {
+        return 'いろ';
+    }),
+    // informal potential
+    Modifier([ModTypes.INFORMAL, ModTypes.POTENTIAL], function(w) {
+        return 'いられる';
+    }),
+    // informal conditional (reba)
+    Modifier([ModTypes.INFORMAL, ModTypes.CONDITIONAL_BA], function(w) {
+        return 'いれば';
+    }),
+    // informal conditional (tara)
+    Modifier([ModTypes.INFORMAL, ModTypes.CONDITIONAL_TARA], function(w) {
+        return 'いたら';
+    }),
+    // informal passive
+    Modifier([ModTypes.INFORMAL, ModTypes.PASSIVE], function(w) {
+        return 'いられる';
+    }),
+    // informal causative
+    Modifier([ModTypes.INFORMAL, ModTypes.CAUSATIVE], function(w) {
+        return 'いさせる';
+    }),
+    // informal negative indicative
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE], function(w) {
+        return 'いない';
+    }),
+    // informal negative progressive
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.PROGRESSIVE], function(w) {
+        return 'いていない';
+    }),
+    // informal negative imperative
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.IMPERATIVE], function(w) {
+        return 'いるな';
+    }),
+    // informal negative volitional
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.VOLITIONAL], function(w) {
+        return 'いまい';
+    }),
+    // informal negative potential
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.POTENTIAL], function(w) {
+        return 'いられない';
+    }),
+    // informal negative conditional (reba)
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.CONDITIONAL_BA], function(w) {
+        return 'いなせれば';
+    }),
+    // informal negative conditional (tara)
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.CONDITIONAL_TARA], function(w) {
+        return 'いなかったら';
+    }),
+    // informal negative passive
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.PASSIVE], function(w) {
+        return 'いられない';
+    }),
+    // informal negative causative
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.CAUSATIVE], function(w) {
+        return 'いさせない';
+    }),
+    // informal past indicative
+    Modifier([ModTypes.INFORMAL], function(w) {
+        return 'いた';
+    }),
+    // informal past progressive
+    Modifier([ModTypes.INFORMAL, ModTypes.PAST, ModTypes.PROGRESSIVE], function(w) {
+        return 'いていた';
+    }),
+    // informal past potential
+    Modifier([ModTypes.INFORMAL, ModTypes.PAST, ModTypes.POTENTIAL], function(w) {
+        return 'いられた';
+    }),
+    // informal past passive
+    Modifier([ModTypes.INFORMAL, ModTypes.PAST, ModTypes.PASSIVE], function(w) {
+        return 'いられた';
+    }),
+    // informal past causative
+    Modifier([ModTypes.INFORMAL, ModTypes.PAST, ModTypes.CAUSATIVE], function(w) {
+        return 'いさせた';
+    }),
+    // informal negative past indicative
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.PAST], function(w) {
+        return 'いなかった';
+    }),
+    // informal negative past progressive
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.PROGRESSIVE], function(w) {
+        return 'いていなかった';
+    }),
+    // informal negative past potential
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.POTENTIAL], function(w) {
+        return 'いられなかった';
+    }),
+    // informal negative past passive
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.PASSIVE], function(w) {
+        return 'いられなかった';
+    }),
+    // informal negative past causative
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.CAUSATIVE], function(w) {
+        return 'いさせなかった';
+    }),
+    // polite indicative
+    Modifier([ModTypes.FORMAL], function(w) {
+        return 'います';
+    }),
+    // polite progressive
+    Modifier([ModTypes.FORMAL, ModTypes.PROGRESSIVE], function(w) {
+        return 'いています';
+    }),
+    // polite volitional
+    Modifier([ModTypes.FORMAL, ModTypes.VOLITIONAL], function(w) {
+        return 'いましょう';
+    }),
+    // polite imperative
+    Modifier([ModTypes.FORMAL, ModTypes.IMPERATIVE], function(w) {
+        return 'いてください';
+    }),
+    // polite potential
+    Modifier([ModTypes.FORMAL, ModTypes.POTENTIAL], function(w) {
+        return 'いられます';
+    }),
+    // polite passive
+    Modifier([ModTypes.FORMAL, ModTypes.PASSIVE], function(w) {
+        return 'いられます';
+    }),
+    // polite causative
+    Modifier([ModTypes.FORMAL, ModTypes.CAUSATIVE], function(w) {
+        return 'いらせます';
+    }),
+    // polite past indicative
+    Modifier([ModTypes.FORMAL, ModTypes.PAST], function(w) {
+        return 'いました';
+    }),
+    // polite past progressive
+    Modifier([ModTypes.FORMAL, ModTypes.PAST, ModTypes.PROGRESSIVE], function(w) {
+        return 'いていました';
+    }),
+    // polite past potential
+    Modifier([ModTypes.FORMAL, ModTypes.PAST, ModTypes.POTENTIAL], function(w) {
+        return 'いられました';
+    }),
+    // polite past passive
+    Modifier([ModTypes.FORMAL, ModTypes.PAST, ModTypes.PASSIVE], function(w) {
+        return 'いられました';
+    }),
+    // polite past causative
+    Modifier([ModTypes.FORMAL, ModTypes.PAST, ModTypes.CAUSATIVE], function(w) {
+        return 'いさせました';
+    }),
+    // polite negative indicative
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE], function(w) {
+        return 'いません';
+    }),
+    // polite negative progressive
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PROGRESSIVE], function(w) {
+        return 'いていません';
+    }),
+    // polite negative potential
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.POTENTIAL], function(w) {
+        return 'いられません';
+    }),
+    // polite negative imperative
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.IMPERATIVE], function(w) {
+        return 'いないでください';
+    }),
+    // polite negative volitional
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.VOLITIONAL], function(w) {
+        return 'いますまい';
+    }),
+    // polite negative passive
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PASSIVE], function(w) {
+        return 'いられません';
+    }),
+    // polite negative causative
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.CAUSATIVE], function(w) {
+        return 'いさせません';
+    }),
+    // polite negative past indicative
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PAST], function(w) {
+        return 'いませんでした';
+    }),
+    // polite negative past progressive
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.PROGRESSIVE], function(w) {
+        return 'いていませんでした';
+    }),
+    // polite negative past potential
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.POTENTIAL], function(w) {
+        return 'いられませんでした';
+    }),
+    // polite negative past passive
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.PASSIVE], function(w) {
+        return 'いられませんでした';
+    }),
+    // polite negative past causative
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.CAUSATIVE], function(w) {
+        return 'いさせませんでした';
+    }),
+    // te
+    Modifier([ModTypes.TE], function(w) {
+        return 'いて';
+    })
+];
+
+var TO_BE_ARU = [
+    // informal indicative
+    Modifier([ModTypes.INFORMAL], function(w) {
+        return 'ある';
+    }),
+    // informal progressive
+    Modifier([ModTypes.INFORMAL, ModTypes.PROGRESSIVE], function(w) {
+        return 'あっている';
+    }),
+    // informal volitional
+    Modifier([ModTypes.INFORMAL, ModTypes.VOLITIONAL], function(w) {
+        return 'あろう';
+    }),
+    // informal imperative
+    Modifier([ModTypes.INFORMAL, ModTypes.IMPERATIVE], function(w) {
+        return 'あれ';
+    }),
+    // informal potential
+    Modifier([ModTypes.INFORMAL, ModTypes.POTENTIAL], function(w) {
+        return 'ありうる';
+    }),
+    // informal conditional (reba)
+    Modifier([ModTypes.INFORMAL, ModTypes.CONDITIONAL_BA], function(w) {
+        return 'あれば';
+    }),
+    // informal conditional (tara)
+    Modifier([ModTypes.INFORMAL, ModTypes.CONDITIONAL_TARA], function(w) {
+        return 'あったら';
+    }),
+    // informal passive
+    Modifier([ModTypes.INFORMAL, ModTypes.PASSIVE], function(w) {
+        return 'あられる';
+    }),
+    // informal causative
+    Modifier([ModTypes.INFORMAL, ModTypes.CAUSATIVE], function(w) {
+        return 'あらせる';
+    }),
+    // informal negative indicative
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE], function(w) {
+        return 'ない';
+    }),
+    // informal negative progressive
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.PROGRESSIVE], function(w) {
+        return 'あっていない';
+    }),
+    // informal negative imperative
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.IMPERATIVE], function(w) {
+        return 'あるな';
+    }),
+    // informal negative volitional
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.VOLITIONAL], function(w) {
+        return 'あるまい';
+    }),
+    // informal negative potential
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.POTENTIAL], function(w) {
+        return 'ありうない';
+    }),
+    // informal negative conditional (reba)
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.CONDITIONAL_BA], function(w) {
+        return 'なければ';
+    }),
+    // informal negative conditional (tara)
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.CONDITIONAL_TARA], function(w) {
+        return 'なかったら';
+    }),
+    // informal negative passive
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.PASSIVE], function(w) {
+        return 'あられない';
+    }),
+    // informal negative causative
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.CAUSATIVE], function(w) {
+        return 'あらせない';
+    }),
+    // informal past indicative
+    Modifier([ModTypes.INFORMAL], function(w) {
+        return 'あった';
+    }),
+    // informal past progressive
+    Modifier([ModTypes.INFORMAL, ModTypes.PAST, ModTypes.PROGRESSIVE], function(w) {
+        return 'あっていた';
+    }),
+    // informal past potential
+    Modifier([ModTypes.INFORMAL, ModTypes.PAST, ModTypes.POTENTIAL], function(w) {
+        return 'ありうた';
+    }),
+    // informal past passive
+    Modifier([ModTypes.INFORMAL, ModTypes.PAST, ModTypes.PASSIVE], function(w) {
+        return 'あられた';
+    }),
+    // informal past causative
+    Modifier([ModTypes.INFORMAL, ModTypes.PAST, ModTypes.CAUSATIVE], function(w) {
+        return 'あらせた';
+    }),
+    // informal negative past indicative
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.PAST], function(w) {
+        return 'なかった';
+    }),
+    // informal negative past progressive
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.PROGRESSIVE], function(w) {
+        return 'あっていなかった';
+    }),
+    // informal negative past potential
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.POTENTIAL], function(w) {
+        return 'ありうなかった';
+    }),
+    // informal negative past passive
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.PASSIVE], function(w) {
+        return 'あられなかった';
+    }),
+    // informal negative past causative
+    Modifier([ModTypes.INFORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.CAUSATIVE], function(w) {
+        return 'あらせなかった';
+    }),
+    // polite indicative
+    Modifier([ModTypes.FORMAL], function(w) {
+        return 'あります';
+    }),
+    // polite progressive
+    Modifier([ModTypes.FORMAL, ModTypes.PROGRESSIVE], function(w) {
+        return 'あっています';
+    }),
+    // polite volitional
+    Modifier([ModTypes.FORMAL, ModTypes.VOLITIONAL], function(w) {
+        return 'ありましょう';
+    }),
+    // polite imperative
+    Modifier([ModTypes.FORMAL, ModTypes.IMPERATIVE], function(w) {
+        return 'あってください';
+    }),
+    // polite potential
+    Modifier([ModTypes.FORMAL, ModTypes.POTENTIAL], function(w) {
+        return 'ありうます';
+    }),
+    // polite passive
+    Modifier([ModTypes.FORMAL, ModTypes.PASSIVE], function(w) {
+        return 'あられます';
+    }),
+    // polite causative
+    Modifier([ModTypes.FORMAL, ModTypes.CAUSATIVE], function(w) {
+        return 'あらせます';
+    }),
+    // polite past indicative
+    Modifier([ModTypes.FORMAL, ModTypes.PAST], function(w) {
+        return 'ありました';
+    }),
+    // polite past progressive
+    Modifier([ModTypes.FORMAL, ModTypes.PAST, ModTypes.PROGRESSIVE], function(w) {
+        return 'あっていました';
+    }),
+    // polite past potential
+    Modifier([ModTypes.FORMAL, ModTypes.PAST, ModTypes.POTENTIAL], function(w) {
+        return 'ありうました';
+    }),
+    // polite past passive
+    Modifier([ModTypes.FORMAL, ModTypes.PAST, ModTypes.PASSIVE], function(w) {
+        return 'あられました';
+    }),
+    // polite past causative
+    Modifier([ModTypes.FORMAL, ModTypes.PAST, ModTypes.CAUSATIVE], function(w) {
+        return 'あらせました';
+    }),
+    // polite negative indicative
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE], function(w) {
+        return 'ありません';
+    }),
+    // polite negative progressive
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PROGRESSIVE], function(w) {
+        return 'あっていません';
+    }),
+    // polite negative potential
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.POTENTIAL], function(w) {
+        return 'ありうません';
+    }),
+    // polite negative imperative
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.IMPERATIVE], function(w) {
+        return 'ないでください';
+    }),
+    // polite negative volitional
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.VOLITIONAL], function(w) {
+        return 'ありますまい';
+    }),
+    // polite negative passive
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PASSIVE], function(w) {
+        return 'ありうません';
+    }),
+    // polite negative causative
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.CAUSATIVE], function(w) {
+        return 'あらせません';
+    }),
+    // polite negative past indicative
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PAST], function(w) {
+        return 'ありませんでした';
+    }),
+    // polite negative past progressive
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.PROGRESSIVE], function(w) {
+        return 'あっていませんでした';
+    }),
+    // polite negative past potential
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.POTENTIAL], function(w) {
+        return 'ありうませんでした';
+    }),
+    // polite negative past passive
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.PASSIVE], function(w) {
+        return 'あられませんでした';
+    }),
+    // polite negative past causative
+    Modifier([ModTypes.FORMAL, ModTypes.NEGATIVE, ModTypes.PAST, ModTypes.CAUSATIVE], function(w) {
+        return 'あらせませんでした';
+    }),
+    // te
+    Modifier([ModTypes.TE], function(w) {
+        return 'あって';
+    })
+];

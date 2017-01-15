@@ -129,9 +129,10 @@ $(document).ready(function() {
     ]);
 
     genOpts('verb-options',[
+      ['To be (いる, ある)', 'to_be'],
       ['Ichidan (-いる,　-える)', 'ichidan'],
-      ['Godan', 'godan'],
-      ['Irregular', 'irregular'],
+      ['Irregular (する,　来る)', 'irregular'],
+      ['Godan', 'godan']
     ]);
 
     genOpts('kanji-options',[
@@ -291,24 +292,30 @@ function pickType() {
     if(sets == null)
     {
       sets = [];
+      if($("#opt-ichidan:checked").length)
+        sets.push([ICHIDAN, ichidan, '[ichidan] v.']);
+
       if($("#opt-godan:checked").length)
-        sets.push([GODAN, godan, '[godan] v.'])
+        sets.push([GODAN, godan, '[godan] v.']);
 
       if($("#opt-irregular:checked").length)
       {
-        sets.push([IRREGULAR_DO, irregular_do, '[irregular] v.'])
-        sets.push([IRREGULAR_EXIST, irregular_exist, '[irregular] v.'])
+        sets.push([IRREGULAR_SURU, irregular_suru, '[irregular] v.']);
+        sets.push([IRREGULAR_KURU, irregular_kuru, '[irregular] v.']);
       }
 
       if($("#opt-naadj:checked").length)
-        sets.push([NA_ADJECTIVE, na_adjective, '[na] adj.'])
+        sets.push([NA_ADJECTIVE, na_adjective, '[na] adj.']);
 
       if($("#opt-iadj:checked").length)
-        sets.push([II_ADJECTIVE, ii_adjective, '[i] adj.'])
+        sets.push([II_ADJECTIVE, ii_adjective, '[i] adj.']);
 
       // keep last
-      if($("#opt-ichidan:checked").length || !sets.length)
-        sets.push([ICHIDAN, ichidan, '[ichidan] v.'])
+      if($("#opt-to_be:checked").length || !sets.length)
+      {
+        sets.push([TO_BE_IRU, to_be_iru, '[to be] v.']);
+        sets.push([TO_BE_ARU, to_be_aru, '[to be] v.']);
+      }
 
       // remove config-disabled modifiers
       filterSets(sets);

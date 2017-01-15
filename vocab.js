@@ -1,11 +1,16 @@
-var irregular_exist = [
-  new Term('だ', null, null, 'to be'),
-  new Term('いる', null, null, 'to exist (animate)'),
-  new Term('ある', null, null, 'to exist (inanimate)'),
-]
+var to_be_iru = [
+  new Term('いる', null, null, 'to be (animate)'),
+];
 
-var irregular_do = [
+var to_be_aru = [
+  new Term('ある', null, null, 'to be (inanimate)'),
+];
+
+var irregular_suru = [
   new Term('する', '為る', '<ruby>為<rp>(</rp><rt>な</rt><rp>)</rp></ruby>る', 'to do'),
+];
+
+var irregular_kuru = [
   new Term('くる', '来る', '<ruby>来<rp>(</rp><rt>く</rt><rp>)</rp></ruby>る', 'to come'),
 ]
 
