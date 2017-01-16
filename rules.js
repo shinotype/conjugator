@@ -330,11 +330,11 @@ var ICHIDAN = [
     }),
     // negative wanting
     Modifier([ModTypes.WANTING, ModTypes.PAST], function(w) {
-      return trimLast(w) + 'たくない';
+      return trimLast(w) + 'たかった';
     }),
     // past wanting
     Modifier([ModTypes.WANTING, ModTypes.NEGATIVE], function(w) {
-      return trimLast(w) + 'たかった';
+      return trimLast(w) + 'たくない';
     }),
     // negative past wanting
     Modifier([ModTypes.WANTING, ModTypes.NEGATIVE, ModTypes.PAST], function(w) {
@@ -592,11 +592,11 @@ var GODAN = [
   }),
   // negative wanting
   Modifier([ModTypes.WANTING, ModTypes.PAST], function(w) {
-    return trimLast(w) + Mogrify.I(snipLast(w)) + 'たくない';
+    return trimLast(w) + Mogrify.I(snipLast(w)) + 'たかった';
   }),
   // past wanting
   Modifier([ModTypes.WANTING, ModTypes.NEGATIVE], function(w) {
-    return trimLast(w) + Mogrify.I(snipLast(w)) + 'たかった';
+    return trimLast(w) + Mogrify.I(snipLast(w)) + 'たくない';
   }),
   // negative past wanting
   Modifier([ModTypes.WANTING, ModTypes.NEGATIVE, ModTypes.PAST], function(w) {
@@ -883,11 +883,11 @@ var IRREGULAR_SURU = [
     }),
     // negative wanting
     Modifier([ModTypes.WANTING, ModTypes.PAST], function(w) {
-      return 'したくない';
+      return 'したかった';
     }),
     // past wanting
     Modifier([ModTypes.WANTING, ModTypes.NEGATIVE], function(w) {
-      return 'したかった';
+      return 'したくない';
     }),
     // negative past wanting
     Modifier([ModTypes.WANTING, ModTypes.NEGATIVE, ModTypes.PAST], function(w) {
@@ -1114,11 +1114,11 @@ var IRREGULAR_KURU = [
     }),
     // negative wanting
     Modifier([ModTypes.WANTING, ModTypes.PAST], function(w) {
-      return 'きたくない';
+      return 'きたかった';
     }),
     // past wanting
     Modifier([ModTypes.WANTING, ModTypes.NEGATIVE], function(w) {
-      return 'きたかった';
+      return 'きたくない';
     }),
     // negative past wanting
     Modifier([ModTypes.WANTING, ModTypes.NEGATIVE, ModTypes.PAST], function(w) {
