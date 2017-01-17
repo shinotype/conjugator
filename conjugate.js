@@ -117,15 +117,15 @@ $(document).ready(function() {
       ModTypes.PAST,
       ModTypes.NEGATIVE,
       ModTypes.TE,
-      ModTypes.WANTING,
+      ModTypes.IMPERATIVE,
       ModTypes.VOLITIONAL,
+      ModTypes.WANTING,
+      ModTypes.PROGRESSIVE,
+      ModTypes.PASSIVE,
       ModTypes.POTENTIAL,
       ModTypes.CAUSATIVE,
-      ModTypes.PASSIVE,
-      ModTypes.PROGRESSIVE,
-      ModTypes.IMPERATIVE,
       ModTypes.CONDITIONAL_BA,
-      ModTypes.CONDITIONAL_TARA,
+      ModTypes.CONDITIONAL_TARA
     ]);
 
     genOpts('verb-options',[
