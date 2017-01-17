@@ -185,7 +185,7 @@ var ICHIDAN = [
         return trimLast(w) + 'させない';
     }),
     // informal past indicative
-    Modifier([ModTypes.INFORMAL], function(w) {
+    Modifier([ModTypes.INFORMAL, ModTypes.PAST], function(w) {
         return trimLast(w) + 'た';
     }),
     // informal past progressive
@@ -446,7 +446,7 @@ var GODAN = [
       return trimLast(w) + Mogrify.A(snipLast(w)) + 'せない';
   }),
   // informal past indicative
-  Modifier([ModTypes.INFORMAL], function(w) {
+  Modifier([ModTypes.INFORMAL, ModTypes.PAST], function(w) {
       w = godan_te(w)
       return trimLast(w) + Mogrify.A(snipLast(w));
   }),
@@ -738,7 +738,7 @@ var IRREGULAR_SURU = [
         return 'させない';
     }),
     // informal past indicative
-    Modifier([ModTypes.INFORMAL], function(w) {
+    Modifier([ModTypes.INFORMAL, ModTypes.PAST], function(w) {
         return 'した';
     }),
     // informal past progressive
@@ -969,7 +969,7 @@ var IRREGULAR_KURU = [
         return 'こさせない';
     }),
     // informal past indicative
-    Modifier([ModTypes.INFORMAL], function(w) {
+    Modifier([ModTypes.INFORMAL, ModTypes.PAST], function(w) {
         return 'きた';
     }),
     // informal past progressive
@@ -1200,7 +1200,7 @@ var TO_BE_IRU = [
         return 'いさせない';
     }),
     // informal past indicative
-    Modifier([ModTypes.INFORMAL], function(w) {
+    Modifier([ModTypes.INFORMAL, ModTypes.PAST], function(w) {
         return 'いた';
     }),
     // informal past progressive
@@ -1415,7 +1415,7 @@ var TO_BE_ARU = [
         return 'あらせない';
     }),
     // informal past indicative
-    Modifier([ModTypes.INFORMAL], function(w) {
+    Modifier([ModTypes.INFORMAL, ModTypes.PAST], function(w) {
         return 'あった';
     }),
     // informal past progressive

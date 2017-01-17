@@ -4,5 +4,6 @@
 - [bibby](https://github.com/bibby)-さん. Conjugation coding.
 - [Chrouya](https://github.com/Chrouya)-せんせい. Japanese expertise.
 - Yatalu-せんせい. Japanese expertise.
+- jpbeginner - Mistake finding (sorry dude!).
 
-Come chat with on on [Discord 日本語と英語](https://discord.gg/0eIsYvFQul270V1L)! 
+Come chat with on on [Discord 日本語と英語](https://discord.gg/0eIsYvFQul270V1L)!
