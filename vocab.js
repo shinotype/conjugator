@@ -413,7 +413,7 @@ var godan = [
   new Term('まわる', '回る', '<ruby>回<rp>(</rp><rt>まわ</rt><rp>)</rp></ruby>る', 'to go round'),
   new Term('みがく', '磨く', '<ruby>磨<rp>(</rp><rt>みが</rt><rp>)</rp></ruby>く', 'to polish'),
   new Term('みつかる', '見つかる', '<ruby>見<rp>(</rp><rt>み</rt><rp>)</rp></ruby>つかる', 'to be found'),
-  new Term('みなす', '見做す', '<ruby>見<rp>(</rp><rt>み</rt><rp>)</rp></ruby><ruby>做<rp>(</rp><rt>做</rt><rp>)</rp></ruby>す', 'to look upon, consider'),
+  new Term('みなす', '見做す', '<ruby>見<rp>(</rp><rt>み</rt><rp>)</rp></ruby><ruby>做<rp>(</rp><rt>な</rt><rp>)</rp></ruby>す', 'to look upon, consider'),
   new Term('みのがす', '見逃す', '<ruby>見<rp>(</rp><rt>み</rt><rp>)</rp></ruby><ruby>逃<rp>(</rp><rt>のが</rt><rp>)</rp></ruby>す', 'to overlook, let pass'),
   new Term('みのる', '実る', '<ruby>実<rp>(</rp><rt>みの</rt><rp>)</rp></ruby>る', 'to ripen, bear fruit'),
   new Term('みはる', '見張る', '<ruby>見<rp>(</rp><rt>み</rt><rp>)</rp></ruby><ruby>張<rp>(</rp><rt>は</rt><rp>)</rp></ruby>る', 'to stand guard, keep lookout'),
