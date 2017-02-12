@@ -7,11 +7,11 @@ var to_be_aru = [
 ];
 
 var irregular_suru = [
-  new Term('する', '為る', '<ruby>為<rp>(</rp><rt>な</rt><rp>)</rp></ruby>る', 'to do'),
+  new Term('する', null, null, 'to do'),
 ];
 
 var irregular_kuru = [
-  new Term('くる', '来る', '<ruby>来<rp>(</rp><rt>く</rt><rp>)</rp></ruby>る', 'to come'),
+  new Term('くる', null, null, 'to come'),
 ]
 
 var ichidan = [
