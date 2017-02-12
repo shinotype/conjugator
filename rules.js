@@ -628,9 +628,6 @@ var II_ADJECTIVE = [
   }),
   Modifier(ModTypes.TE, function(w){
     return trimLast(w) + 'くて';
-  }),
-  Modifier([ModTypes.NEGATIVE, ModTypes.TE], function(w){
-    return trimLast(w) + 'てない';
   })
 ]
 
