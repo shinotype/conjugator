@@ -343,9 +343,6 @@ var ICHIDAN = [
 ];
 
 var godan_te = function(w) {
-    // iku exception
-    if(w == 'いく') return 'いって';
-
     var e, l = snipLast(w);
     switch(l)
     {
@@ -450,8 +447,6 @@ var GODAN = [
   }),
   // informal past indicative
   Modifier([ModTypes.INFORMAL, ModTypes.PAST], function(w) {
-      // iku exception
-      if(w == 'いく') return 'いった';
       w = godan_te(w)
       return trimLast(w) + Mogrify.A(snipLast(w));
   }),
