@@ -107,8 +107,7 @@ $(document).ready(function() {
     }
 
     genOpts('adjective-options', [
-      ['い adjectives', 'iadj'],
-      ['な adjectives', 'naadj']
+      ['い adjectives', 'iadj']
     ]);
 
     genOpts('conjugation-options', [
@@ -303,9 +302,6 @@ function pickType() {
         sets.push([IRREGULAR_SURU, irregular_suru, '[irregular] v.']);
         sets.push([IRREGULAR_KURU, irregular_kuru, '[irregular] v.']);
       }
-
-      if($("#opt-naadj:checked").length)
-        sets.push([NA_ADJECTIVE, na_adjective, '[na] adj.']);
 
       if($("#opt-iadj:checked").length)
         sets.push([II_ADJECTIVE, ii_adjective, '[i] adj.']);
