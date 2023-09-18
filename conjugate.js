@@ -1,7 +1,5 @@
 'use strict';
 
-var score = 0;
-var mult = 1;
 var correct = '';
 var quiz_term = '';
 var termType = '';
@@ -183,8 +181,6 @@ function skipQuestion() {
     } else {
         skipped = true;
         scored = false;
-        mult = 1;
-        $('#mult').text(mult);
         $('#answer').addClass('flash-red');
         addWell($('#answer').val()||'', correct, quiz_term, false)
         $('#answer').val(correct[0]);
@@ -204,16 +200,7 @@ function submitAnswer() {
             $('#answer').removeClass('flash');
         }, 300);
 
-        if (time > 0) {
-            score += Math.ceil(time * mult / 2);
-            mult += 1;
-        } else {
-            mult = 1;
-        }
-
         addWell(ans, correct, quiz_term, true)
-        $('#score').text(score);
-        $('#mult').text(mult);
         scored = true;
     }
 }

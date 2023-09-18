@@ -143,30 +143,6 @@ body {
     width: 200px;
 }
 
-#scoreboard {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    background: #ecf0f1;
-    padding: 10px;
-    border-radius: 5px;
-    width: 150px;
-    text-align: right;
-}
-
-#score {
-    font-family: 'Lucida Bright', Georgia, serif;
-    font-size: 12pt;
-}
-
-.lb-text {
-    color: #3498db;
-}
-
-#mult {
-    font-size: 16pt;
-}
-
 #part {
   margin-right: 16px;
 }
