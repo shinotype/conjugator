@@ -1,138 +1,140 @@
 html {
-    font-family: "Hiragino Maru Gothic Pro", Osaka, "ヒラギノ角ゴ Pro W3", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    cursor: default;
+  font-family: 'Hiragino Maru Gothic Pro', Osaka, 'ヒラギノ角ゴ Pro W3',
+    'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
 }
 
 body {
-    margin: 0 !important;
-    padding: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 #title {
-    position: relative;
-    font-size: 36pt;
-    margin-right: auto;
-    margin-left: auto;
-    width: 100%;
-    background: #ecf0f1;
-    height: 150px;
-    z-index: 1;
+  position: relative;
+  font-size: 36pt;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+  background: #ecf0f1;
+  height: 150px;
+  z-index: 1;
 }
 
 #title-text {
-    position: absolute;
-    left: 50%;
-    margin-left: -480px;
-    height: 80px;
-    width: 960px;
-    bottom: 50%;
-    margin-bottom: -40px;
-    text-align: center;
-    vertical-align: text-bottom;
+  position: absolute;
+  left: 50%;
+  margin-left: -480px;
+  height: 80px;
+  width: 960px;
+  bottom: 50%;
+  margin-bottom: -40px;
+  text-align: center;
+  vertical-align: text-bottom;
 }
 
 #start-screen {
-    position: absolute;
-    top: 100px;
-    left: 50%;
-    margin-left: -480px;
-    width: 960px;
-    text-align: center;
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  margin-left: -480px;
+  width: 960px;
+  text-align: center;
 }
 
 .btn {
-    width: 250px;
-    margin-right: auto;
-    margin-left: auto;
-    font-size: 20pt;
-    padding: 12px;
-    border-radius: 5px;
-    color: #ecf0f1;
-    background: #2980b9;
-    margin-top: 60px;
+  width: 250px;
+  margin-right: auto;
+  margin-left: auto;
+  font-size: 20pt;
+  padding: 12px;
+  border-radius: 5px;
+  color: #ecf0f1;
+  background: #2980b9;
+  margin-top: 60px;
 }
 
 .btn ~ .btn {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .btn:hover {
-    background: #3498db;
-    color: black;
+  background: #3498db;
+  color: black;
 }
 
-#main, #option-menu {
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 1000px;
-    width: 960px;
-    display: none;
-    position: relative;
+#main,
+#option-menu {
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 1000px;
+  width: 960px;
+  display: none;
+  position: relative;
 }
 
 #help {
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 1000px;
-    width: 960px;
-    display: none;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 1000px;
+  width: 960px;
+  display: none;
 }
 
 #info {
-    padding: 0px 10px;
+  padding: 0px 10px;
 }
 
 #question {
-    font-size: 30pt;
+  font-size: 30pt;
 }
 
 #def {
-    font-size: 18pt;
+  font-size: 18pt;
 }
 
 #meaning {
-    font-family: 'Lucida Bright', Georgia, serif;
-    color: #707070;
+  font-family: 'Lucida Bright', Georgia, serif;
+  color: #707070;
 }
 
 #explan p {
-    width: 60%;
-    text-align: justify;
-    margin: auto;
-    margin-top: 20px;
+  width: 60%;
+  text-align: justify;
+  margin: auto;
+  margin-top: 20px;
 }
 
 #optplay {
-  text-align:center;
+  text-align: center;
   margin-bottom: 60px;
 }
 
 .mod {
-    font-size: 15pt;
-    color: #ecf0f1;
-    background: #e74c3c;
-    float: left;
-    margin-right: 5px;
-    padding: 0px 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+  font-size: 15pt;
+  color: #ecf0f1;
+  background: #e74c3c;
+  float: left;
+  margin-right: 5px;
+  padding: 0px 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }
 
 .mod:hover {
-    background: #e74c3c;
+  background: #e74c3c;
 }
 
 .space {
-    color: white;
-    float: left;
-    width: 200px;
+  color: white;
+  float: left;
+  width: 200px;
 }
 
 #part {
@@ -149,18 +151,30 @@ body {
 }
 
 @-webkit-keyframes flash {
-    0% { background-color: #3498db;}
-    100% {background-color: none;}
+  0% {
+    background-color: #3498db;
+  }
+  100% {
+    background-color: none;
+  }
 }
 
 @-moz-keyframes flash {
-    0% { background-color: #3498db;}
-    100% {background-color: none;}
+  0% {
+    background-color: #3498db;
+  }
+  100% {
+    background-color: none;
+  }
 }
 
 @-ms-keyframes flash {
-    0% { background-color: #3498db;}
-    100% {background-color: none;}
+  0% {
+    background-color: #3498db;
+  }
+  100% {
+    background-color: none;
+  }
 }
 
 .flash-red {
@@ -173,45 +187,58 @@ body {
 }
 
 @-webkit-keyframes flashr {
-    0% { background-color: #e74c3c;}
-    100% {background-color: none;}
+  0% {
+    background-color: #e74c3c;
+  }
+  100% {
+    background-color: none;
+  }
 }
 
 @-moz-keyframes flashr {
-    0% { background-color: #e74c3c;}
-    100% {background-color: none;}
+  0% {
+    background-color: #e74c3c;
+  }
+  100% {
+    background-color: none;
+  }
 }
 
 @-ms-keyframes flashr {
-    0% { background-color: #e74c3c;}
-    100% {background-color: none;}
+  0% {
+    background-color: #e74c3c;
+  }
+  100% {
+    background-color: none;
+  }
 }
 
 textarea:focus {
-    outline-width: 0;
-    border: 3px solid #3498db;
+  outline-width: 0;
+  border: 3px solid #3498db;
 }
 
 textarea {
-    border: 0;
-    resize: none;
-    background-color: #ecf0f1;
-    width: 100%;
-    height: 60px;
-    margin: 3px;
-    padding: 5px 10px;
-    font-size: 25pt;
-    font-family: "Hiragino Maru Gothic Pro", Osaka, "ヒラギノ角ゴ Pro W3", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
-    border-radius: 6px;
+  border: 0;
+  resize: none;
+  background-color: #ecf0f1;
+  width: 100%;
+  height: 60px;
+  margin: 3px;
+  padding: 5px 10px;
+  font-size: 25pt;
+  font-family: 'Hiragino Maru Gothic Pro', Osaka, 'ヒラギノ角ゴ Pro W3',
+    'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+  border-radius: 6px;
 }
 
-input[type=checkbox] {
-    visibility: hidden;
+input[type='checkbox'] {
+  visibility: hidden;
 }
 
 /**/
-#well{
-    margin-top:32px;
+#well {
+  margin-top: 32px;
 }
 
 .wellitem {
@@ -225,17 +252,17 @@ input[type=checkbox] {
 }
 
 .wellitem a {
-    text-decoration: none;
-    color: #004;
+  text-decoration: none;
+  color: #004;
 }
 
 .well-left {
-    display:block;
-    width: 30%;
+  display: block;
+  width: 30%;
 }
 
 .wellitem .mods {
-  display:block;
+  display: block;
   width: 60%;
 }
 
@@ -252,84 +279,84 @@ input[type=checkbox] {
 }
 
 .skipped {
-    background: #e74c3c;
+  background: #e74c3c;
 }
 
-.striken{
+.striken {
   text-decoration: line-through;
 }
 
-.debug{
+.debug {
   cursor: pointer;
 }
 
-.debug-out{
+.debug-out {
   background-color: yellow;
 }
 
 .option-label {
-    float: left;
-    font-size: 16pt;
-    padding-top: 4px;
-    width: 280px;
-    height: 40px;
-    top: 5px;
+  float: left;
+  font-size: 16pt;
+  padding-top: 4px;
+  width: 280px;
+  height: 40px;
+  top: 5px;
 }
 
 .check-box {
-    width: 120px;
-    height: 40px;
-    background: #ecf0f1;
-    border-radius: 50px;
-    position: relative;
-    float: left;
-    margin-right: 80px;
+  width: 120px;
+  height: 40px;
+  background: #ecf0f1;
+  border-radius: 50px;
+  position: relative;
+  float: left;
+  margin-right: 80px;
 }
 
 .check-box:before {
-    content: 'On';
-    position: absolute;
-    top: 8px;
-    left: 13px;
-    height: 2px;
-    color: #2980b9;
-    font-size: 12pt;
+  content: 'On';
+  position: absolute;
+  top: 8px;
+  left: 13px;
+  height: 2px;
+  color: #2980b9;
+  font-size: 12pt;
 }
 
 .check-box:after {
-    content: 'Off';
-    position: absolute;
-    top: 8px;
-    left: 84px;
-    height: 2px;
-    color: #e74c3c;
-    font-size: 12pt;
+  content: 'Off';
+  position: absolute;
+  top: 8px;
+  left: 84px;
+  height: 2px;
+  color: #e74c3c;
+  font-size: 12pt;
 }
 
 .check-box label {
-    display: block;
-    width: 52px;
-    height: 22px;
-    border-radius: 50px;
-    -webkit-transition: all .5s ease;
-    -moz-transition: all .5s ease;
-    -o-transition: all .5s ease;
-    -ms-transition: all .5s ease;
-    transition: all .5s ease;
-    cursor: pointer;
-    position: absolute;
-    top: 9px;
-    z-index: 1;
-    left: 12px;
-    background: #707070;
+  display: block;
+  width: 52px;
+  height: 22px;
+  border-radius: 50px;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  cursor: pointer;
+  position: absolute;
+  top: 9px;
+  z-index: 1;
+  left: 12px;
+  background: #707070;
 }
 
-.check-box input[type=checkbox]:checked + label {
-    left: 60px;
-    background: #3498db;
+.check-box input[type='checkbox']:checked + label {
+  left: 60px;
+  background: #3498db;
 }
 
 .clear,
 .menu-sec {
-    clear: both
+  clear: both;
 }
