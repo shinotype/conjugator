@@ -1,10 +1,7 @@
 'use strict';
 
 var score = 0;
-var time = 0;
 var mult = 1;
-var _timeMax = 30;
-var timeMax = _timeMax;
 var correct = '';
 var quiz_term = '';
 var termType = '';
@@ -186,11 +183,9 @@ function skipQuestion() {
     } else {
         skipped = true;
         scored = false;
-        time = -1;
         mult = 1;
         $('#mult').text(mult);
         $('#answer').addClass('flash-red');
-        $('#time-bar').css('background', '#e74c3c');
         addWell($('#answer').val()||'', correct, quiz_term, false)
         $('#answer').val(correct[0]);
         setTimeout(function(){
@@ -210,12 +205,10 @@ function submitAnswer() {
         }, 300);
 
         if (time > 0) {
-            score += Math.ceil(time * mult / timeMax);
+            score += Math.ceil(time * mult / 2);
             mult += 1;
-            timeMax *= 0.95;
         } else {
             mult = 1;
-            timeMax = _timeMax;
         }
 
         addWell(ans, correct, quiz_term, true)
@@ -225,22 +218,11 @@ function submitAnswer() {
     }
 }
 
-// Sets time remaining bar to the percentage passed in
-function setTimeBar(percent) {
-    $('#time-bar').css('background-image', 'linear-gradient(left, #3498db ' + percent + '%, #ecf0f1 ' + percent + '%)');
-    $('#time-bar').css('background-image', '-o-linear-gradient(left, #3498db ' + percent + '%, #ecf0f1 ' + percent + '%)');
-    $('#time-bar').css('background-image', '-moz-linear-gradient(left, #3498db ' + percent + '%, #ecf0f1 ' + percent + '%)');
-    $('#time-bar').css('background-image', '-webkit-linear-gradient(left, #3498db ' + percent + '%, #ecf0f1 ' + percent + '%)');
-    $('#time-bar').css('background-image', '-ms-linear-gradient(left, #3498db ' + percent + '%, #ecf0f1 ' + percent + '%)');
-}
-
 // Generate a new question
 function nextQuestion() {
     console.clear();
     scored = false;
     skipped = false;
-    setTimeBar(100);
-    time = 100 * timeMax;
 
     var wordset = pickType(),
       type = wordset[0],
@@ -344,15 +326,6 @@ function snipLast(word) {
     return word.substr(-1);
 }
 
-// Timer function called 100 times per second
-function interval() {
-    if (skipped || scored)
-      return
-
-    time--;
-    setTimeBar(time/timeMax);
-}
-
 // Adds an label to the options menu
 function genLabel(desc) {
     var $label = $('<div/>', {class: 'option-label'});
@@ -375,8 +348,6 @@ function genFullOption(target, label, opt) {
     target.append(genLabel(label));
     target.append(genOption(opt));
 }
-
-var t = setInterval(interval, 10);
 
 function addWell(actual, expected, rootword, isCorrect)
 {
