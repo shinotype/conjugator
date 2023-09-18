@@ -25,7 +25,6 @@ $(document).ready(function() {
         $('#main').animate({'margin-top': '20px'}, 800);
         $('#title-text').animate({'width': '350px', 'font-size': '20pt', 'height': '40px', 'bottom': '5px', 'margin-bottom': '0px'}, 800);
         $('#title').animate({'height': '50px'}, 800);
-        $('#ribbon img').animate({'height': '50px', 'width': '50px'}, 800);
     });
 
     $('#options').click(function() {
@@ -34,7 +33,6 @@ $(document).ready(function() {
         $('#option-menu').animate({'margin-top': '20px'}, 800);
         $('#title-text').animate({'width': '350px', 'font-size': '20pt', 'height': '40px', 'bottom': '5px', 'margin-bottom': '0px'}, 800);
         $('#title').animate({'height': '50px'}, 800);
-        $('#ribbon img').animate({'height': '50px', 'width': '50px'}, 800);
     });
 
     function debugTerm(e)

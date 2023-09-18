@@ -101,14 +101,6 @@ body {
     color: #707070;
 }
 
-#ribbon {
-    z-index: 2;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border: 0;
-}
-
 #explan p {
     width: 60%;
     text-align: justify;
